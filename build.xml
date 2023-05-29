@@ -8,4 +8,17 @@
     <target name="compile">
         <mkdir dir="build/classes"/>
         <javac srcdir="src" destdir="build/classes">
-	    	<cl
+	    	<classpath id="classpath" description="The default classpath.">
+	    	  <pathelement path="${classpath}"/>
+	    	  <fileset dir="libs">
+	    	  	<include name="*.jar"/>
+	    	  </fileset>
+	    	</classpath>
+        </javac>
+    </target>
+
+    <target name="jar"  depends="compile">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/RainbowNLP.jar" basedir="build/classes">
+        	<zipgroupfileset dir="libs" includes="*.jar" /> 
+        </jar
