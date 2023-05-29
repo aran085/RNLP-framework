@@ -21,4 +21,8 @@
         <mkdir dir="build/jar"/>
         <jar destfile="build/jar/RainbowNLP.jar" basedir="build/classes">
         	<zipgroupfileset dir="libs" includes="*.jar" /> 
-        </jar
+        </jar>
+    	
+    </target>
+
+</project>
