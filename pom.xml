@@ -151,4 +151,14 @@
 		<!-- Core utilities used by other modules. Define this if you use Spring 
 			Utility APIs (org.springframework.core.*/org.springframework.util.*) -->
 		<dependency>
-			<gro
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		
+		<!-- Expression Language (depends on spring-core) Define this if you use -->
+		<!-- Spring Expression APIs (org.springframework.expression.*) -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework</groupId> -->
+		<!-- <artifactId>spring-expression</artifactId> -->
+		<!-- <version>${org.springframework.version}</version
