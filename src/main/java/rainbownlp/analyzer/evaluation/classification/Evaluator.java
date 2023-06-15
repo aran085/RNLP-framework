@@ -13,3 +13,21 @@ public class Evaluator {
 	public static ResultRow evaluateByClass(List<MLExample> pExamplesToTest, 
 			String exampleClassToEvaluate)
 	{
+		ResultRow rr = new ResultRow();
+		
+		for(MLExample example : pExamplesToTest)
+		{
+			String expected_class = example.getExpectedClass();
+			String predicted_class = example.getPredictedClass();
+			if(exampleClassToEvaluate.equals(expected_class))
+			{
+				if(expected_class.equals(predicted_class))
+					rr.TP++;
+				else
+					rr.FN++;
+			}
+			else
+			{
+				if(exampleClassToEvaluate.equals(predicted_class))
+					rr.FP++;
+				e
