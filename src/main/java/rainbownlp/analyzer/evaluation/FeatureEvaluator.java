@@ -10,4 +10,14 @@ import rainbownlp.machinelearning.convertor.SVMLightFormatConvertor;
 
 public class FeatureEvaluator {
 	public void evaluateFeatures(ICrossfoldValidator cfValidator, List<MLExample> examples) throws Exception{
-		SVMLightFormatC
+		SVMLightFormatConvertor.onlyIncludeAttributes = new ArrayList<String>();
+		List<String> features = FeatureValuePair.getAllFeatureNames();
+		String featuresIncluded = "";
+		HashMap<String, IEvaluationResult> attributeResult = new HashMap<String, IEvaluationResult>();
+		for(String feature : features){
+			SVMLightFormatConvertor.onlyIncludeAttributes.add(feature);
+			featuresIncluded+="/"+feature;
+			attributeResult.put(featuresIncluded, cfValidator.crossValidation(examples, 2));
+		}
+		
+	
