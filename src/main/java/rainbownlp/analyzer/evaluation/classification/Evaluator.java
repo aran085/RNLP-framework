@@ -61,4 +61,18 @@ public class Evaluator {
 		for(MLExample example : pExamplesToTest)
 		{
 			if(!exampleClasses.contains(example.getExpectedClass()))
-				exampleClasses.add(example.getExpected
+				exampleClasses.add(example.getExpectedClass());
+//			if(example.getPredictedClass()!=null && !exampleClasses.contains(example.getPredictedClass()))
+//				exampleClasses.add(example.getPredictedClass());
+		}
+		
+		EvaluationResult er = new EvaluationResult();
+		for(String exampleClass : exampleClasses)
+		{
+			er.evaluationResultByClass.put(exampleClass.toString(), 
+					evaluateByClass(pExamplesToTest, exampleClass));
+		}
+		return er;
+	}
+	
+	public static ResultRow getNoClassEvaluationResult(List<MLExample>
