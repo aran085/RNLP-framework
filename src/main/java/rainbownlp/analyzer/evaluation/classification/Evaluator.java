@@ -48,4 +48,17 @@ public class Evaluator {
 		
 		for(Integer i=1;i<=class_titles.length;i++)
 		{
-			r
+			result.evaluationResultByClass.put(class_titles[i-1], 
+					evaluateByClass(pExamplesToTest, i.toString()));
+		}
+		return result;
+	}
+	
+	public static EvaluationResult getEvaluationResult(List<MLExample> pExamplesToTest) 
+	{
+		ArrayList<String> exampleClasses = new ArrayList<String>();
+	
+		for(MLExample example : pExamplesToTest)
+		{
+			if(!exampleClasses.contains(example.getExpectedClass()))
+				exampleClasses.add(example.getExpected
