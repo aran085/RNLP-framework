@@ -30,4 +30,22 @@ public class Evaluator {
 			{
 				if(exampleClassToEvaluate.equals(predicted_class))
 					rr.FP++;
-				e
+				else
+					rr.TN++;
+			}
+		}
+		
+		return rr;
+	}
+
+	public static void evaluateDevelopementResult(String resultsRoot)
+	{
+		SystemUtil.runShellCommand("a2-evaluate.pl -g gold-devel "+resultsRoot+"/*.a2");
+	}
+	public static EvaluationResult getEvaluationResult(List<MLExample> pExamplesToTest, 
+			String[] class_titles) {
+		EvaluationResult result = new EvaluationResult();
+		
+		for(Integer i=1;i<=class_titles.length;i++)
+		{
+			r
