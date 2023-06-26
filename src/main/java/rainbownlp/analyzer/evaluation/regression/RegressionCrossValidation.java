@@ -64,3 +64,10 @@ public class RegressionCrossValidation implements ICrossfoldValidator {
 		
 		ConfigurationUtil.crossFoldCurrent = 0;
 		
+		return averageRes;
+	}
+	@Override
+	public LearnerEngine getLearnerEngine() {
+		return mlModel;
+	}
+}
