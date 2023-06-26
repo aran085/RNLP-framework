@@ -75,4 +75,21 @@ public class Evaluator {
 		return er;
 	}
 	
-	public static ResultRow getNoClassEvaluationResult(List<MLExample>
+	public static ResultRow getNoClassEvaluationResult(List<MLExample> pExamplesToTest) 
+	{
+		ResultRow rr = new ResultRow();
+		
+		for(MLExample example : pExamplesToTest)
+		{
+			String expected_class = example.getExpectedClass();
+			String predicted_class = example.getPredictedClass();
+			if(expected_class.equals(predicted_class))
+				rr.TP++;
+			else
+				rr.FN++;
+			
+		}
+		
+		return rr;
+	}
+}
