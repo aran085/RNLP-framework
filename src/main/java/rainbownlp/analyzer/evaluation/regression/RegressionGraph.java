@@ -22,4 +22,20 @@ public class RegressionGraph extends JPanel {
 	   private static final Color GRAPH_POINT_COLOR = new Color(150, 50, 50, 180);
 	   private static final Stroke GRAPH_STROKE = new BasicStroke(3f);
 	   private static final int GRAPH_POINT_WIDTH = 12;
-	   priv
+	   private static final int Y_HATCH_CNT = 10;
+	   List<Double> xValues;
+	   List<Double> yValues;
+	
+
+	   public RegressionGraph(List<Double> xs, List<Double> ys) throws Exception {
+		   if(xs.size()!=ys.size())
+			   throw(new Exception("X and Y values must have same size"));
+			xValues = xs;
+			yValues = ys;
+		}
+
+	@Override
+	   protected void paintComponent(Graphics g) {
+	      super.paintComponent(g);
+	      Graphics2D g2 = (Graphics2D)g; 
+	      g2.setRende
