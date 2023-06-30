@@ -38,4 +38,12 @@ public class RegressionGraph extends JPanel {
 	   protected void paintComponent(Graphics g) {
 	      super.paintComponent(g);
 	      Graphics2D g2 = (Graphics2D)g; 
-	      g2.setRende
+	      g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+	      double xScale = ((double) getWidth() - 2 * BORDER_GAP) / (xValues.size() - 1);
+	      double yScale = ((double) getHeight() - 2 * BORDER_GAP) / (yValues.size() - 1);
+
+	      List<Point> graphPoints = new ArrayList<Point>();
+	      for (int i = 0; i < xValues.size(); i++) {
+	         int x1 = (int) (xValues.get(i) * xScale + BORDER_GAP);
+	         int y1 = (int) (yValues.get(i) * yScale + BORDER_GAP);
