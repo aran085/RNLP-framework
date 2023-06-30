@@ -47,3 +47,14 @@ public class RegressionGraph extends JPanel {
 	      for (int i = 0; i < xValues.size(); i++) {
 	         int x1 = (int) (xValues.get(i) * xScale + BORDER_GAP);
 	         int y1 = (int) (yValues.get(i) * yScale + BORDER_GAP);
+//	         int y1 = (int) ((MAX_SCORE - scores.get(i)) * yScale + BORDER_GAP);
+	         graphPoints.add(new Point(x1, y1));
+	      }
+
+	      // create x and y axes 
+	      g2.drawLine(BORDER_GAP, getHeight() - BORDER_GAP, BORDER_GAP, BORDER_GAP);
+	      g2.drawLine(BORDER_GAP, getHeight() - BORDER_GAP, getWidth() - BORDER_GAP, getHeight() - BORDER_GAP);
+
+//	      // create hatch marks for y axis. 
+//	      for (int i = 0; i < Y_HATCH_CNT; i++) {
+//	         int x0 
