@@ -91,4 +91,19 @@ public class RegressionGraph extends JPanel {
 	         int y = graphPoints.get(i).y - GRAPH_POINT_WIDTH / 2;;
 	         int ovalW = GRAPH_POINT_WIDTH;
 	         int ovalH = GRAPH_POINT_WIDTH;
-	         g2.
+	         g2.fillOval(x, y, ovalW, ovalH);
+	      }
+	   }
+
+	   @Override
+	   public Dimension getPreferredSize() {
+	      return new Dimension(PREF_W, PREF_H);
+	   }
+
+	   public static void createAndShowGui(List<Double> Xs, List<Double> Ys) throws Exception {
+//	      List<Integer> scores = new ArrayList<Integer>();
+//	      Random random = new Random();
+//	      int maxDataPoints = 16;
+//	      int maxScore = 20;
+//	      for (int i = 0; i < maxDataPoints ; i++) {
+//	         scores.add
