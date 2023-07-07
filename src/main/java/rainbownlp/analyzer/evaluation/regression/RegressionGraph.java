@@ -106,4 +106,17 @@ public class RegressionGraph extends JPanel {
 //	      int maxDataPoints = 16;
 //	      int maxScore = 20;
 //	      for (int i = 0; i < maxDataPoints ; i++) {
-//	         scores.add
+//	         scores.add(random.nextInt(maxScore));
+//	      }
+	      RegressionGraph mainPanel = new RegressionGraph(Xs, Ys);
+
+	      JFrame frame = new JFrame("DrawGraph");
+	      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	      frame.getContentPane().add(mainPanel);
+	      frame.pack();
+	      frame.setLocationByPlatform(true);
+	      frame.setVisible(true);
+	   }
+
+	   public static void main(String[] args) {
+	      SwingUtilities.invokeLater(new Runnable()
