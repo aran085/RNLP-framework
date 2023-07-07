@@ -80,4 +80,15 @@ public class RegressionGraph extends JPanel {
 	         int x1 = graphPoints.get(i).x;
 	         int y1 = graphPoints.get(i).y;
 	         int x2 = graphPoints.get(i + 1).x;
-	         int y2 
+	         int y2 = graphPoints.get(i + 1).y;
+	         g2.drawLine(x1, y1, x2, y2);         
+	      }
+
+	      g2.setStroke(oldStroke);      
+	      g2.setColor(GRAPH_POINT_COLOR);
+	      for (int i = 0; i < graphPoints.size(); i++) {
+	         int x = graphPoints.get(i).x - GRAPH_POINT_WIDTH / 2;
+	         int y = graphPoints.get(i).y - GRAPH_POINT_WIDTH / 2;;
+	         int ovalW = GRAPH_POINT_WIDTH;
+	         int ovalH = GRAPH_POINT_WIDTH;
+	         g2.
