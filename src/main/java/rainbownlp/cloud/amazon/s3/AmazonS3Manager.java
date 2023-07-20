@@ -40,4 +40,8 @@ public class AmazonS3Manager {
                     "such as not being able to access the network.");
             System.out.println("Error Message: " + ace.getMessage());
         } catch (IOException e) {
-			// TODO Auto-generated
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}
