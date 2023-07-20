@@ -17,4 +17,12 @@ public class AmazonS3Manager {
 						AmazonS3Manager.class.getResourceAsStream(
 		                		"AwsCredentials.properties")));
 		       
-            System.out.println("Uploading a 
+            System.out.println("Uploading a new object to S3 from a file\n");
+            File file = new File(uploadFileName);
+            s3client.putObject(new PutObjectRequest(
+            		                 bucketName, keyName, file));
+
+         } catch (AmazonServiceException ase) {
+            System.out.println("Caught an AmazonServiceException, which " +
+            		"means your request made it " +
+                    "to Amazon S3, but was rejected with an erro
