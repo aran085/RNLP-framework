@@ -7,4 +7,17 @@ public class SentenceObject {
 	public String content;
 	public Clause clause;
 	public ArrayList<String> modifiers;
-	public Depen
+	public DependencyLine dependencyLine;
+	public Integer contentOffset;
+	
+	public SentenceObject()
+	{
+		content = new String();
+		clause= new Clause ();
+		modifiers = new ArrayList<String>();
+		dependencyLine = new DependencyLine();
+		contentOffset = new Integer(0);
+
+	}
+	
+}
