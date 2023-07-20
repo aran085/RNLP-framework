@@ -35,4 +35,9 @@ public class AmazonEMRManager {
 			stepsConfig.add(new StepConfig("Step"+counter, step));
 		}
 
-		A
+		AddJobFlowStepsResult result = client.addJobFlowSteps(new AddJobFlowStepsRequest()
+			.withJobFlowId("j-1HTE8WKS7SODR")
+			.withSteps(stepsConfig));
+		System.out.println(result.getStepIds());
+	}
+}
