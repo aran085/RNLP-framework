@@ -7,4 +7,14 @@ import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.PropertiesCredentials;
 import com.amazonaws.services.s3.AmazonS3;
-im
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.PutObjectRequest;
+
+public class AmazonS3Manager {
+	public void uploadFileToS3(String uploadFileName, String bucketName, String keyName){
+		 try {
+			 AmazonS3 s3client = new AmazonS3Client(new PropertiesCredentials(
+						AmazonS3Manager.class.getResourceAsStream(
+		                		"AwsCredentials.properties")));
+		       
+            System.out.println("Uploading a 
