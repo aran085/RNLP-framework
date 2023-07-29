@@ -10,4 +10,11 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 @Configuration
 @EnableAsync
-public class AppConfiguration implements 
+public class AppConfiguration implements AsyncConfigurer {
+
+
+	@Override
+	public Executor getAsyncExecutor() {
+		return new SimpleAsyncTaskExecutor();
+	}
+}
