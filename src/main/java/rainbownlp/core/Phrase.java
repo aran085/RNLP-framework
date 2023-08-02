@@ -466,3 +466,381 @@ public class Phrase implements Serializable  {
 		
 		return next_Phrase;
 	}
+	public static Phrase getPrevPhraseInSentence(Phrase p,Artifact sentence)
+	{	
+		Phrase prev_Phrase = null;
+		List<Phrase> ordered =getOrderedPhrasesInSentence(sentence);
+		
+		int index_of_p = ordered.indexOf(p);
+		if (index_of_p-1>=0)
+		{
+			prev_Phrase = ordered.get(index_of_p-1);
+			
+		}
+		
+		
+		return prev_Phrase;
+	}
+	public static Artifact getFirstNounInPhrase(Phrase p,Artifact sentence)
+	{	
+		Artifact first_noun = null;
+		Artifact cur_artifact = p.getStartArtifact();
+		while (cur_artifact != p.getEndArtifact())
+		{
+			if(cur_artifact.getPOS().startsWith("NN"))
+			{
+				first_noun = cur_artifact;
+				break;
+			}
+			cur_artifact = cur_artifact.getNextArtifact();
+		}
+		if (first_noun ==null)
+		{
+			first_noun = p.getEndArtifact();
+		}
+
+		return first_noun;
+	}
+	public static Artifact getLastNounInPhrase(Phrase p,Artifact sentence)
+	{	
+		Artifact last_noun = null;
+		Artifact cur_artifact = p.getEndArtifact();
+		while (cur_artifact != p.getStartArtifact())
+		{
+			if(cur_artifact.getPOS().startsWith("NN"))
+			{
+				last_noun = cur_artifact;
+				break;
+			}
+			cur_artifact = cur_artifact.getPreviousArtifact();
+		}
+		if (last_noun ==null)
+		{
+			last_noun = p.getEndArtifact();
+		}
+
+		return last_noun;
+	}
+	public static boolean isNestedPhrase(Phrase p,Artifact sentence)
+	{	
+		boolean is_nested = false;
+		Phrase next_p = getNextPhraseInSentence(p, sentence);
+		if(next_p != null && p.getEndArtifact().getWordIndex() >= next_p.getStartArtifact().getWordIndex() )
+		{
+			is_nested = true;
+		}
+		if (is_nested==false)
+		{
+			Phrase prev_p = getPrevPhraseInSentence(p, sentence);
+			if(prev_p != null && prev_p.getEndArtifact().getWordIndex() >= p.getStartArtifact().getWordIndex() )
+			{
+				is_nested = true;
+			}
+		}
+		
+		return is_nested;
+	}
+	@Transient
+	public String getPOS() {
+		
+		Artifact start_artifact = getStartArtifact();
+		Artifact end_Artifact  = getEndArtifact();
+		Artifact cur_artifact = start_artifact;
+		
+		String pos = "";
+		while(!cur_artifact.equals(end_Artifact))
+		{
+			pos += cur_artifact.getPOS()+"-";
+			cur_artifact = cur_artifact.getNextArtifact();
+		}
+		pos += cur_artifact.getPOS();
+		
+		return pos;
+		
+	}
+	//this returns the offsets included in this phrase
+	public List<Integer> listWordOffsetsInPhrase()
+	{
+		List<Integer> included_offsets =  new ArrayList();
+		
+		Artifact start_artifact = getStartArtifact();
+		Artifact end_Artifact  = getEndArtifact();
+		Artifact cur_artifact = start_artifact;
+		
+		while(!cur_artifact.equals(end_Artifact))
+		{
+			
+			included_offsets.add(cur_artifact.getWordIndex());
+			cur_artifact = cur_artifact.getNextArtifact();
+		}
+		included_offsets.add(cur_artifact.getWordIndex());
+		return included_offsets;
+	}
+	//this is somehow duplicate with normalizedhead...
+	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="headArtifact")
+	public Artifact getHeadArtifact() throws SQLException {
+		
+		if (headArtifact!=null)
+		{
+			return headArtifact;
+		}
+		else
+		{
+//			Artifact h= calculateHeadWord();
+//			setHeadArtifact(h);
+//			HibernateUtil.save(this);
+			return null;
+		}
+	}
+//	TODO: improve and make it a solid approach
+	private Artifact calculateHeadWord() throws SQLException
+	{
+		Artifact head = getEndArtifact();
+		if (getStartArtifact().getArtifactId() == getEndArtifact().getArtifactId())
+		{
+			return head;
+		}
+		String phrase_pos= getPOS();
+		String type = getPhraseEntityType();
+		
+		if(type.equals("EVENT"))
+		{	
+			if (phrase_pos != null && (phrase_pos.equals("VB-RP") || phrase_pos.equals("VBG-RP")
+					|| phrase_pos.equals("VBN-JJ") || phrase_pos.equals("VB-IN") || phrase_pos.equals("VBN-IN"))
+					||  phrase_pos.equals("JJ-TO-VB") ||  phrase_pos.startsWith("VBG-TO"))
+			{
+				head = getStartArtifact();
+			}
+			else if(!getEndArtifact().getContent().matches(".*\\W$"))
+			{
+				head = getEndArtifact();
+			}
+			else
+			{
+				Artifact cur_artifact = getEndArtifact();
+				while(cur_artifact != null && cur_artifact != getStartArtifact() && (cur_artifact.getContent().matches("\\W") ||
+						cur_artifact.getContent().matches("\\W.*")))
+				{
+					cur_artifact = cur_artifact.getPreviousArtifact();
+				}
+				head = cur_artifact;
+			}
+//			
+		}
+		else if (type.equals("TIMEX3"))
+		{
+			//get the type of the timex
+//			TimexPhrase timex_obj = TimexPhrase.getRelatedTimexFromPhrase(this);
+//			TimexPhrase.TimexType  timex_type = timex_obj.getTimexType();
+			Artifact sentence = getStartArtifact().getParentArtifact();
+//			Phrase next_p= Phrase.getNextPhraseInSentence(this, sentence);
+//		
+//			if(timex_type != null && timex_type.equals(TimexPhrase.TimexType.DATE))
+//			{
+				if (getPhraseContent().startsWith("\\d+\\/") || getPhraseContent().startsWith("\\d+-"))
+				{
+					head = getStartArtifact();
+				}
+				else
+				{
+					head = Phrase.getFirstNounInPhrase(this, sentence);
+				}
+				
+//			}
+//			else
+//			{
+//				
+//				head = Phrase.getFirstNounInPhrase(this, sentence);
+//			}
+			
+		}
+		return head;
+	}
+	
+	public void setHeadArtifact(Artifact headArtifact) {
+		this.headArtifact = headArtifact;
+	}
+	public static List<Phrase> getPhrasesInDocument(String file_path) {
+		String hql = "from Phrase p where p.startArtifact.associatedFilePath = :filePath " +
+				"and p.phraseEntityType is not null";
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("filePath", file_path);
+		
+		List<Phrase> phrase_objects = 
+			(List<Phrase>) HibernateUtil.executeReader(hql, params);
+		
+		return phrase_objects;
+	}
+	@Override
+	public String toString()
+	{
+		return "Id="+getPhraseId()+"/Content="+
+			getPhraseContent();
+	}
+	public void setAltLineIndex(Integer altLineIndex) {
+		this.altLineIndex = altLineIndex;
+	}
+	public Integer getAltLineIndex() {
+		return altLineIndex;
+	}
+	public void setAltStartWordIndex(Integer altStartWordIndex) {
+		this.altStartWordIndex = altStartWordIndex;
+	}
+	public Integer getAltStartWordIndex() {
+		return altStartWordIndex;
+	}
+	public void setAltEndWordIndex(Integer altEndWordIndex) {
+		this.altEndWordIndex = altEndWordIndex;
+	}
+	public Integer getAltEndWordIndex() {
+		return altEndWordIndex;
+	}
+	
+	public static boolean isSecTime(Phrase p)
+	{
+		boolean is_sectime = false;
+		Artifact startArtifact = p.getStartArtifact();
+		String hql = "from Phrase where startArtifact = "+
+		startArtifact.getArtifactId()+" and endArtifact="+
+		p.getEndArtifact().getArtifactId()+
+		" and phraseEntityType = 'SECTIME'";
+		List<Phrase> phrase_obj = 
+			(List<Phrase>)HibernateUtil.executeReader(hql);
+		if (phrase_obj.size()!=0)
+		{
+			is_sectime = true;
+		}
+			
+		return is_sectime;
+	}
+	public void setNormalizedHead(String normalizedHead) {
+		this.normalizedHead = normalizedHead;
+	}
+	public String getNormalizedHead() {
+		return normalizedHead;
+	}
+	public void setNormalOffset(Integer normalOffset) {
+		this.normalOffset = normalOffset;
+	}
+	public Integer getNormalOffset() {
+		return normalOffset;
+	}
+	
+	@Override public boolean equals(Object pPhrase)
+	{
+		if(!(pPhrase instanceof Phrase))
+			return false;
+		Phrase p = (Phrase)pPhrase;
+		return (p.getPhraseId() == phraseId) || 
+				(p.getPhraseContent()==phraseContent && 
+				p.getStartArtifact().equals(getStartArtifact()) &&
+				p.getEndArtifact().equals(getEndArtifact()));
+	}
+	@Override public int hashCode()
+	{
+		return phraseId;
+	}
+	public static class phraseComparator implements Comparator<Phrase>{
+	    public int compare(Phrase p1, Phrase p2) {
+	        return ((Integer)p1.getStartCharOffset()).compareTo((Integer)(p2.getStartCharOffset()));
+	    }
+	}
+	@Transient	
+	public static List<Phrase> getPhrasesBetweenPhrases(Phrase phrase1,Phrase phrase2, String filePath) {
+		String hql = "FROM Phrase where startCharOffset > :endphrase1 and endCharOffset<:startphrase2 and startArtifact.associatedFilePath=:filePath";
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("endphrase1", phrase1.getEndCharOffset());
+		params.put("startphrase2", phrase2.getStartCharOffset());
+		params.put("filePath", filePath);
+		return (List<Phrase>) HibernateUtil.executeReader(hql, params);
+	}
+
+		
+	public Artifact calclateGovVerb() {
+		Artifact gov_verb = null;
+		String pos = getPOS();
+
+		if (pos != null && (pos.matches("VB|VBD|VBN|VBP|VBZ") || pos.equals("VB-RP") || pos.equals("VBG-RP")|| pos.equals("VBN-JJ") || pos.equals("VB-IN") || pos.equals("VBN-IN"))
+				||  pos.equals("JJ-TO-VB") ||  pos.startsWith("VBG-TO"))
+		{
+			gov_verb = this.getStartArtifact();
+		}
+		else
+		{
+			Artifact next = this.getEndArtifact().getNextArtifact();
+			if (next != null && next.getPOS().startsWith("VB"))
+			{
+				Artifact next_verb = next.getNextArtifact();
+				if (next_verb.getPOS().matches("VBD"))
+				{
+					gov_verb = next_verb;
+				}
+				else
+				{
+					gov_verb = next;
+				}
+			}
+			else
+			{
+				Artifact prev = this.getStartArtifact().getPreviousArtifact();
+				while (prev != null  &&
+						!prev.getPOS().matches("VB|VBD|VBN|VBP|VBZ") )
+				{
+					prev = prev.getPreviousArtifact();
+				}
+				if (prev != null && prev.getPOS().startsWith("VB"))
+				{
+					gov_verb = prev;
+				}
+			}
+			//if still null
+			if (gov_verb == null)
+			{
+				while (next != null  &&
+						!next.getPOS().matches("VB|VBD|VBN|VBP|VBZ") )
+				{
+					next = next.getNextArtifact();
+				}
+				if (next != null && next.getPOS().startsWith("VB"))
+				{
+					Artifact next_verb = next.getNextArtifact();
+					if (next_verb.getPOS().matches("VBD"))
+					{
+						gov_verb = next_verb;
+					}
+					else
+					{
+						gov_verb = next;
+					}
+					
+				}
+			}
+		}
+		
+		return gov_verb;
+	}
+	public Phrase getPreviousPhrase(List<Phrase> oregered_list)
+	{
+		Phrase prev = null;
+		int index = oregered_list.indexOf(this)-1;
+		if (index !=-1)
+		{
+			prev = oregered_list.get(index);
+		}
+		return prev;
+		
+	}
+	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="govVerb")
+	public Artifact getGovVerb() {
+		return govVerb;
+	}
+	public void setGovVerb(Artifact govVerb) {
+		this.govVerb = govVerb;
+	}
+	public static Phrase createIndependentPhrase(String term) {
+		
+		return getInstance(term, null, null, "SINGLEPHRASE");
+	}
+}
