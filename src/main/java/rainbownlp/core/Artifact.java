@@ -763,3 +763,6 @@ public class Artifact {
 				(List<Artifact>) HibernateUtil.executeReader(hql);
 		return artifact_objects;
 	}
+	
+	
+}
