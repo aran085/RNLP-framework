@@ -16,4 +16,17 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
-import 
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
+import org.hibernate.Session;
+import org.hibernate.annotations.GenericGenerator;
+
+import rainbownlp.core.Artifact;
+import rainbownlp.core.Artifact.Type;
+import rainbownlp.core.FeatureValuePair;
+import rainbownlp.core.Phrase;
+import rainbownlp.core.PhraseLink;
+import rainbownlp.core.PhraseLink.LinkType;
+import rainbownlp.util.FileUtil;
+import rainbownlp.util.HibernateUtil;
