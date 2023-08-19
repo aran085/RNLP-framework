@@ -30,4 +30,15 @@ public class LearnerCommon {
 //					class_titles[i] = BioConceptsRelation.BioRelationTypes.values()[i].name();
 //			}else
 //			{
-//				class_titles = new String[BioNLPLoader.TriggerTypes.values().length
+//				class_titles = new String[BioNLPLoader.TriggerTypes.values().length];
+//				for(int i=0;i<BioNLPLoader.TriggerTypes.values().length;i++)
+//					class_titles[i] = BioNLPLoader.TriggerTypes.values()[i].name();
+//			}
+		}else if (ConfigurationUtil.getValue("RelationMode").equals("I2B2")) {
+//			if(Configuration.Mode==OperationMode.ARTIFACT)
+//			{
+//				class_titles = new String[]{"NoRelation","HasRelation"};
+//			}else
+//			{
+//				Configuration.Mode=OperationMode.EDGE;
+//				class_titles = new String[ClinicalRelationTypes.values().
