@@ -53,4 +53,14 @@ public class LearnerCommon {
 		int trainigExamplesCount = 0;
 //		if(Setting.Mode==OperationMode.EDGE)
 //			trainigExamplesCount=RelationExampleTable.getTrainingExamplesCount();
-//		if(Setting.Mode==OperationMode.TR
+//		if(Setting.Mode==OperationMode.TRIGGER)
+//			trainigExamplesCount=ArtifactExampleTable.getTrainingExamplesCount();
+//		if(Setting.Mode==OperationMode.ARTIFACT)
+//			trainigExamplesCount=ArtifactTable.getTrainingExamplesCount();
+		return trainigExamplesCount;
+	}
+
+	public static void setPortionOfTrainAsTest(int foldIndex, int foldCount) throws SQLException {
+//		if(Setting.Mode==OperationMode.EDGE)
+//			RelationExampleTable.setPortionOfTrainsetAsTest(foldIndex, foldCount);
+//		if(Setting.Mode==OperationMo
