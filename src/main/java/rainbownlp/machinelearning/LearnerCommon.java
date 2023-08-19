@@ -22,4 +22,12 @@ public class LearnerCommon {
 
 	public static String[] getClassTitles() {
 		String[] class_titles = new String[1];
-	
+		if (ConfigurationUtil.getValue("RelationMode").equals("BioNLP")) {
+//			if(Configuration.Mode==OperationMode.EDGE)
+//			{
+//				class_titles = new String[BioConceptsRelation.BioRelationTypes.values().length];
+//				for(int i=0;i<BioConceptsRelation.BioRelationTypes.values().length;i++)
+//					class_titles[i] = BioConceptsRelation.BioRelationTypes.values()[i].name();
+//			}else
+//			{
+//				class_titles = new String[BioNLPLoader.TriggerTypes.values().length
