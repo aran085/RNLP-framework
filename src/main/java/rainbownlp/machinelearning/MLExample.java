@@ -93,3 +93,20 @@ public class MLExample  implements Serializable {
 		return predictionEngine;
 	}
 
+	public void setPredictionEngine(String pPredictionEngine) {
+		predictionEngine = pPredictionEngine;
+	}
+
+
+	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE }, fetch=FetchType.LAZY )
+    @JoinColumn(name="relatedPhrase")
+	public Phrase getRelatedPhrase() {
+		return relatedPhrase;
+	}
+
+	public void setRelatedPhrase(Phrase relatedPhrase) {
+		this.relatedPhrase = relatedPhrase;
+	}
+	
+	public String getCorpusName() {
+		return corp
