@@ -66,4 +66,17 @@ public class MLExample  implements Serializable {
 		{
 			if(hibernateSession == null)
 				hibernateSession = HibernateUtil.sessionFactory.openSession();
-			String hql = "from MLExampleF
+			String hql = "from MLExampleFeature where relatedExample = "+
+			 getExampleId()+ 
+			 " order by featureValuePair.tempFeatureIndex";
+			exampleFeatures = (List<MLExampleFeature>) HibernateUtil.executeReader(hql, null,null, hibernateSession);
+		}
+		return exampleFeatures;
+	}
+
+	@Transient
+	public MLExampleFeature getExampleFeatureById(int featureValuePairId)
+	{
+		
+		if(hibernateSession == null)
+			hibernateSession = HibernateUtil.sessionFactory.open
