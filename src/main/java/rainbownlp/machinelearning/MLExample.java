@@ -109,4 +109,25 @@ public class MLExample  implements Serializable {
 	}
 	
 	public String getCorpusName() {
-		return corp
+		return corpusName;
+	}
+	
+	public void setCorpusName(String pCorpusName) {
+		corpusName = pCorpusName;
+	}
+	
+	public boolean getForTrain() {
+		return forTrain;
+	}
+		
+	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE }, fetch=FetchType.LAZY )
+    @JoinColumn(name="relatedArtifact")
+	public Artifact getRelatedArtifact() {
+		return relatedArtifact;
+	}
+
+	public void setRelatedArtifact(Artifact relatedArtifact) {
+		this.relatedArtifact = relatedArtifact;
+	}
+
+	@ManyToOne( cascade = {
