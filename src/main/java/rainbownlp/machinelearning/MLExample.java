@@ -50,4 +50,20 @@ public class MLExample  implements Serializable {
 	private String associatedFilePath;
 	private double predictionWeight;
 	private int expectedReal;
-	private int expectedCl
+	private int expectedClosure;
+	private int expectedIntegrated;
+	private String expectedClassOptionalCategory;
+	private String predictedClassOptionalCategory;
+	private String relatedConcept;
+	
+	@Transient
+	List<MLExampleFeature> exampleFeatures;
+	static public Session hibernateSession; 
+	@Transient
+	public List<MLExampleFeature> getExampleFeatures()
+	{
+		if(exampleFeatures==null)
+		{
+			if(hibernateSession == null)
+				hibernateSession = HibernateUtil.sessionFactory.openSession();
+			String hql = "from MLExampleF
