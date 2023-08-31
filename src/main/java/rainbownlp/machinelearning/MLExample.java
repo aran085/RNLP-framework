@@ -130,4 +130,22 @@ public class MLExample  implements Serializable {
 		this.relatedArtifact = relatedArtifact;
 	}
 
-	@ManyToOne( cascade = {
+	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} , fetch=FetchType.LAZY )
+    @JoinColumn(name="relatedPhraseLink")
+	public PhraseLink getRelatedPhraseLink() {
+		return relatedPhraseLink;
+	}
+
+	public void setRelatedPhraseLink(PhraseLink relatedPhraseLink) {
+		this.relatedPhraseLink = relatedPhraseLink;
+	}
+
+	public void setForTrain(boolean isForTrain) {
+		forTrain = isForTrain;
+	}
+	
+	public String getPredictedClass() {
+		return predictedClass;
+	}
+	
+	public
