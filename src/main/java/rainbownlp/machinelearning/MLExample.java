@@ -162,4 +162,26 @@ public class MLExample  implements Serializable {
 		setExpectedClass(pExpectedClass.toString());
 	}	
 	public void setExpectedClass(String pExpectedClass) {
-		expectedClass = pExpectedC
+		expectedClass = pExpectedClass;
+	}
+	@Id
+	@GeneratedValue(generator="increment")
+	@GenericGenerator(name="increment", strategy = "increment")
+	public int getExampleId() {
+		return exampleId;
+	}
+
+	public void setExampleId(int exampleId) {
+		this.exampleId = exampleId;
+	}
+	@Temporal(TemporalType.TIMESTAMP)
+    Date updateTime;
+	
+	
+	@PrePersist
+    protected void onCreate() {
+		updateTime = new Date();
+    }
+
+    @PreUpdate
+    protecte
