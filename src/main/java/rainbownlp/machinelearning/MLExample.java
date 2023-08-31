@@ -184,4 +184,19 @@ public class MLExample  implements Serializable {
     }
 
     @PreUpdate
-    protecte
+    protected void onUpdate() {
+    	updateTime = new Date();
+    }
+
+	public static MLExample getInstanceForArtifact(Artifact artifact,
+			String experimentgroup) {
+		String hql = "from MLExample where relatedArtifact = "+
+				artifact.getArtifactId() + " and corpusName = '"+
+				experimentgroup+"'";
+			List<MLExample> example_objects = 
+					getExamplesList(hql);
+		    
+			MLExample example_obj;
+		    if(example_objects.size()==0)
+		    {
+		    	example_obj = new
