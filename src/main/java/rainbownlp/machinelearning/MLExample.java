@@ -148,4 +148,18 @@ public class MLExample  implements Serializable {
 		return predictedClass;
 	}
 	
-	public
+	public void setPredictedClass(String pPredictedClass) {
+		predictedClass = pPredictedClass;
+	}
+	
+	public String getExpectedClass() {
+		return expectedClass;
+	}
+	public void setPredictedClass(Integer pPredictedClass) {
+		setPredictedClass(pPredictedClass.toString());
+	}	
+	public void setExpectedClass(Integer pExpectedClass) {
+		setExpectedClass(pExpectedClass.toString());
+	}	
+	public void setExpectedClass(String pExpectedClass) {
+		expectedClass = pExpectedC
