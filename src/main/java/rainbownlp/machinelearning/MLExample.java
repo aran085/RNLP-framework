@@ -216,4 +216,18 @@ public class MLExample  implements Serializable {
 	}
 
 	public void calculateFeatures(
-			List<IFeatureCalculator> featureCalculators) throws Excepti
+			List<IFeatureCalculator> featureCalculators) throws Exception {
+		for(IFeatureCalculator feature_calculator : featureCalculators)
+		{
+			Date before = new Date(); 
+			feature_calculator.calculateFeatures(this);
+			Date after = new Date(); 
+			FileUtil.logLine(null, feature_calculator.getClass().toString()+"       "+(after.getTime()-before.getTime()));
+		}
+		
+	}
+
+	public static MLExample getInstanceForLink(PhraseLink phrase_link,
+			String experimentgroup) {
+		String hql = "from MLExample where relatedPhraseLink = "+
+				phrase_link.
