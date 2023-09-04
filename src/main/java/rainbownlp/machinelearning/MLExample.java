@@ -199,4 +199,21 @@ public class MLExample  implements Serializable {
 			MLExample example_obj;
 		    if(example_objects.size()==0)
 		    {
-		    	example_obj = new
+		    	example_obj = new MLExample();
+		  
+		    	
+		    	example_obj.setCorpusName(experimentgroup);
+		    	example_obj.setRelatedArtifact(artifact);
+		    	
+		    	if(ConfigurationUtil.SaveInGetInstance)
+			    	saveExample(example_obj);
+		    }else
+		    {
+		    	example_obj = 
+		    			example_objects.get(0);
+		    }
+		    return example_obj;
+	}
+
+	public void calculateFeatures(
+			List<IFeatureCalculator> featureCalculators) throws Excepti
