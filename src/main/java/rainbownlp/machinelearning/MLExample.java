@@ -243,4 +243,23 @@ public class MLExample  implements Serializable {
 		    	
 		    	example_obj.setCorpusName(experimentgroup);
 		    	example_obj.setRelatedPhraseLink(phrase_link);
-		    	if(phrase_link.getFromPhrase().getStartArtifact()!=nu
+		    	if(phrase_link.getFromPhrase().getStartArtifact()!=null)
+		    		example_obj.setAssociatedFilePath(phrase_link.getFromPhrase().getStartArtifact().getAssociatedFilePath());
+		    	
+		    	if(ConfigurationUtil.SaveInGetInstance)
+		    		saveExample(example_obj);
+		    }else
+		    {
+		    	example_obj = 
+		    			example_objects.get(0);
+		    }
+		    return example_obj;
+	}
+
+
+	public static void saveExample(MLExample example)
+	{
+		if(hibernateSession == null)
+			hibernateSession = HibernateUtil.loaderSession;
+		
+		HibernateUtil.
