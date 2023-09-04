@@ -287,4 +287,15 @@ public class MLExample  implements Serializable {
 	}
 	public static List<MLExample> getAllExamples(String experimentgroup, boolean for_train, Integer limit)
 	{
-		return getAllExamples(experimen
+		return getAllExamples(experimentgroup, for_train, "exampleId", limit);
+	}
+	
+	public static List<MLExample> getAllExamples(String experimentgroup, boolean for_train)
+	{
+		return getAllExamples(experimentgroup, for_train, "exampleId", null);
+	}
+
+	public static List<MLExample> getAllExamples(String experimentgroup, boolean for_train, String orderByPhrase, Integer limit)
+	{
+		String hql = "from MLExample where corpusName = '"+
+						experimentgroup+"' and forTrain="+(for_train?1:0)
