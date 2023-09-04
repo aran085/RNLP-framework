@@ -314,4 +314,19 @@ public class MLExample  implements Serializable {
 	public static List<MLExample> getAllExamples(boolean for_train)
 	{
 		String hql = "from MLExample where  forTrain="+(for_train?1:0)
-					
+						+"  order by exampleId";
+		
+		return getExamplesList(hql);
+	}
+	private static List<MLExample> getExamplesList(String hql) {
+		return getExamplesList(hql, Integer.MAX_VALUE);
+	}
+
+	public static List<MLExample> getExampleById(int example_id, String experimentgroup)
+	{
+		String hql = "from MLExample where corpusName = '"+
+						experimentgroup+"' and exampleId="+example_id
+						+" order by exampleId";
+		return getExamplesList(hql);
+	}
+	public st
