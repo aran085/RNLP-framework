@@ -345,4 +345,16 @@ public class MLExample  implements Serializable {
 	}
 	public static List<MLExample> getAllExamples(String experimentgroup, boolean for_train, int limit)
 	{
-		String hq
+		String hql = "from MLExample where corpusName = '"+
+						experimentgroup+"'  and forTrain="+(for_train?1:0)+" order by exampleId";
+		return getExamplesList(hql);
+	}
+	public static List<MLExample> getLastExamples(String experimentgroup, boolean for_train, int limit)
+	{
+		String hql = "from MLExample where corpusName = '"+
+			experimentgroup+"'  and forTrain="+(for_train?1:0)+
+				"order by exampleId desc";
+		return getExamplesList(hql);
+	}
+	
+	public static List<MLExam
