@@ -386,3 +386,15 @@ public class MLExample  implements Serializable {
 	 * @param doc_path
 	 * @return
 	 */
+	public static List<MLExample> getExamplesInDocument(String experimentgroup, 
+			String doc_path,Integer expectedClass)
+	{
+		
+		String hql = "FROM MLExample "  +
+				"where expectedClass = :expectedClass and corpusName =:corpusName " +
+				" and associatedFilePath = '" +
+				doc_path + "' " +
+						"order by exampleId desc";
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("corpusName", experimentgroup);
