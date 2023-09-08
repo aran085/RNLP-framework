@@ -412,4 +412,16 @@ public class MLExample  implements Serializable {
 		
 		String docPaths = "";
 		for(int i=0;i<num_of_documents;i++)
-			docPaths = docPaths.concat(", '"+doc
+			docPaths = docPaths.concat(", '"+docs.get(i).getAssociatedFilePath()+"'");
+		docPaths = docPaths.replaceFirst(",", "");
+		
+		String hql = "FROM MLExample "  +
+				"where corpusName =:corpusName " +
+				" and forTrain="+(for_train?1:0) +" and associatedFilePath in (" +
+						docPaths + ") " +
+						"order by associatedFilePath desc";
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("corpusName", experimentgroup);
+		
+		return getExamplesList(hql, pa
