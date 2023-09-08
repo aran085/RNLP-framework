@@ -329,4 +329,20 @@ public class MLExample  implements Serializable {
 						+" order by exampleId";
 		return getExamplesList(hql);
 	}
-	public st
+	public static MLExample getExampleById(int example_id)
+	{
+		String hql = "from MLExample where exampleId="+example_id;
+		List<MLExample> example_objects = 
+			(List<MLExample>) HibernateUtil.executeReader(hql);
+    
+		MLExample example_obj=null;
+	    if(example_objects.size()!=0)
+	    {
+	    	example_obj = 
+	    		example_objects.get(0);
+	    }
+	    return example_obj;
+	}
+	public static List<MLExample> getAllExamples(String experimentgroup, boolean for_train, int limit)
+	{
+		String hq
