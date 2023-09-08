@@ -449,4 +449,13 @@ public class MLExample  implements Serializable {
 			docPaths = docPaths.replaceFirst(",", "");
 		}
 		Integer type1_from_fvpIds = FeatureValuePair.getRelatedFromEventTypeFValuePairIds(type1);
-		Integer type1_to
+		Integer type1_to_fvpIds = FeatureValuePair.getRelatedToEventTypeFValuePairIds(type1);
+		Integer type2_from_fvpIds = FeatureValuePair.getRelatedFromEventTypeFValuePairIds(type2);
+		Integer type2_to_fvpIds = FeatureValuePair.getRelatedToEventTypeFValuePairIds(type2);
+		
+//		String from_fvpIds = "";
+//		for(Integer id: fromFeatureValuePairIds)
+//		{
+//			from_fvpIds = from_fvpIds.concat(", '"+id+"'");
+//		}
+//		from_fvpIds = from_fvpIds.replaceFirst(",", "")
