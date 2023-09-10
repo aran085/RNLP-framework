@@ -527,4 +527,17 @@ public class MLExample  implements Serializable {
 		String hql = "update MLExample set predictedClass = "+predicted+" where exampleId="+example_id;
 		HibernateUtil.executeNonReader(hql);
 	}
-	public static void resetExamplesPredictedToDefault(String exper
+	public static void resetExamplesPredictedToDefault(String experimentgroup, boolean for_train, int default_predicted) {
+		String hql = "update MLExample set predictedClass = "+default_predicted+" where corpusName = '"+
+				experimentgroup+"' and forTrain="+(for_train?1:0);
+		HibernateUtil.executeNonReader(hql);
+	}
+
+	public void setAssociatedFilePath(String associatedFilePath) {
+		this.associatedFilePath = associatedFilePath;
+	}
+
+	public String getAssociatedFilePath() {
+		return associatedFilePath;
+	}
+	public static v
