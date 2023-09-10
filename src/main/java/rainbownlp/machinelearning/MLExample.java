@@ -477,4 +477,16 @@ public class MLExample  implements Serializable {
 	    " and forTrain="+(for_train?1:0) +" and " +
 	      "associatedFilePath in (" +
 	      docPaths + ") " +
-      "order
+      "order by associatedFilePath desc";
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("corpusName", experimentgroup);
+		
+		return getExamplesList(hql, params);
+	}
+	public static List<MLExample> getLastExamplesByDocument(String experimentgroup, 
+			boolean for_train, int num_of_documents)
+	{
+		List<Artifact> docs = Artifact.listByType(Type.Document,for_train);
+		if(docs.size()<num_of_documents)
+			num_of_documents = docs.
