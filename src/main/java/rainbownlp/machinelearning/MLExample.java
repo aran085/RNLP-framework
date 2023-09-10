@@ -470,4 +470,11 @@ public class MLExample  implements Serializable {
 		
 		String hql = " FROM MLExample m  "  +
 	    "where (( exists (from MLExampleFeature f where m.exampleId =f.relatedExample and featureValuePair in ("+type1_from_fvpIds+"))" +
-	    " and exists (from MLExampleFeature f where m.exampleId =f.re
+	    " and exists (from MLExampleFeature f where m.exampleId =f.relatedExample and featureValuePair in ("+type2_to_fvpIds+"))) or" +
+	    " (exists (from MLExampleFeature f where m.exampleId =f.relatedExample and featureValuePair in ("+type2_from_fvpIds+")) and " +
+	    		"exists (from MLExampleFeature f where m.exampleId =f.relatedExample and featureValuePair in ("+type1_to_fvpIds+")))) " +
+	    " and corpusName =:corpusName " +
+	    " and forTrain="+(for_train?1:0) +" and " +
+	      "associatedFilePath in (" +
+	      docPaths + ") " +
+      "order
