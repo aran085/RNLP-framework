@@ -502,4 +502,21 @@ public class MLExample  implements Serializable {
 						docPaths + ") " +
 						"order by associatedFilePath desc";
 		
-		HashMap<String, Object> params
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("corpusName", experimentgroup);
+		
+		return getExamplesList(hql, params);
+	}
+
+	@Override
+	public MLExample clone()
+	{
+		if(relatedArtifact!=null)
+			return getInstanceForArtifact(relatedArtifact, corpusName);
+		else
+			return getInstanceForLink(relatedPhraseLink, corpusName);	}
+
+
+	
+	public static void resetExamplesPredicted(String experimentgroup, boolean for_train) {
+		String hql = "upda
