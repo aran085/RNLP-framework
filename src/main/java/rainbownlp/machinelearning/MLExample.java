@@ -458,4 +458,16 @@ public class MLExample  implements Serializable {
 //		{
 //			from_fvpIds = from_fvpIds.concat(", '"+id+"'");
 //		}
-//		from_fvpIds = from_fvpIds.replaceFirst(",", "")
+//		from_fvpIds = from_fvpIds.replaceFirst(",", "");
+//		
+//
+//		String to_fvpIds = "";
+//		for(Integer id: toTeatureValuePairIds)
+//		{
+//			to_fvpIds = to_fvpIds.concat(", '"+id+"'");
+//		}
+//		to_fvpIds = to_fvpIds.replaceFirst(",", "");
+		
+		String hql = " FROM MLExample m  "  +
+	    "where (( exists (from MLExampleFeature f where m.exampleId =f.relatedExample and featureValuePair in ("+type1_from_fvpIds+"))" +
+	    " and exists (from MLExampleFeature f where m.exampleId =f.re
