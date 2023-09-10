@@ -540,4 +540,14 @@ public class MLExample  implements Serializable {
 	public String getAssociatedFilePath() {
 		return associatedFilePath;
 	}
-	public static v
+	public static void updateAssociatedFilePath() {
+		String hql = "from MLExample ";
+		Session tempSession = HibernateUtil.sessionFactory.openSession();
+		List<MLExample> examples = 
+				(List<MLExample>) HibernateUtil.executeReader(hql, null,null, tempSession);
+		
+		for (MLExample example: examples)
+		{
+			PhraseLink related_phrase_link = example.getRelatedPhraseLink();
+			Phrase from_phrase = related_phrase_link.getFromPhrase();
+			Artifact start_artifact 
