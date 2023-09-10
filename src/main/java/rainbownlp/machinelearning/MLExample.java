@@ -565,4 +565,20 @@ public class MLExample  implements Serializable {
 			String experimentgroup) {
 		String hql = "from MLExample where relatedPhraseLink = "+
 				phrase_link.getPhraseLinkId() + " and corpusName = '"+
-				
+						experimentgroup+"'";
+			List<MLExample> example_objects = 
+					getExamplesList(hql);
+		    
+			MLExample example_obj=null;
+		    if(example_objects.size()!=0)
+		    {
+		    	example_obj = 
+		    			example_objects.get(0);
+		    }
+		    return example_obj;
+	}
+	public static MLExample findInstance(PhraseLink phrase_link) {
+		String hql = "from MLExample where relatedPhraseLink = "+
+				phrase_link.getPhraseLinkId();
+		
+			List<MLExample> example_objects 
