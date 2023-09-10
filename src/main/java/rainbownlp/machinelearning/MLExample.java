@@ -550,4 +550,19 @@ public class MLExample  implements Serializable {
 		{
 			PhraseLink related_phrase_link = example.getRelatedPhraseLink();
 			Phrase from_phrase = related_phrase_link.getFromPhrase();
-			Artifact start_artifact 
+			Artifact start_artifact = from_phrase.getStartArtifact();
+			
+			String file_path = start_artifact.getAssociatedFilePath();
+			example.setAssociatedFilePath(file_path);
+			HibernateUtil.save(example, tempSession);
+			
+		}
+		tempSession.clear();
+		tempSession.close();
+	}
+
+	public static MLExample findInstance(PhraseLink phrase_link,
+			String experimentgroup) {
+		String hql = "from MLExample where relatedPhraseLink = "+
+				phrase_link.getPhraseLinkId() + " and corpusName = '"+
+				
