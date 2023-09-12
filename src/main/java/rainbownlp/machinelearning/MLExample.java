@@ -581,4 +581,19 @@ public class MLExample  implements Serializable {
 		String hql = "from MLExample where relatedPhraseLink = "+
 				phrase_link.getPhraseLinkId();
 		
-			List<MLExample> example_objects 
+			List<MLExample> example_objects = 
+					getExamplesList(hql);
+		    
+			MLExample example_obj=null;
+		    if(example_objects.size()!=0)
+		    {
+		    	example_obj = 
+		    			example_objects.get(0);
+		    }
+		    return example_obj;
+	}
+	
+	public static List<MLExample> getDecidedExamplesForGraph(Artifact p_sentence) {
+		String hql = "from MLExample where predictedClass <> -1 " +
+				"and relatedPhraseLink.fromPhrase.startArtifact.parentArtifact = "+
+		p_sentence
