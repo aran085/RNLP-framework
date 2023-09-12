@@ -596,4 +596,16 @@ public class MLExample  implements Serializable {
 	public static List<MLExample> getDecidedExamplesForGraph(Artifact p_sentence) {
 		String hql = "from MLExample where predictedClass <> -1 " +
 				"and relatedPhraseLink.fromPhrase.startArtifact.parentArtifact = "+
-		p_sentence
+		p_sentence.getArtifactId()+" and relatedPhraseLink.toPhrase.startArtifact.parentArtifact = "+
+		p_sentence.getArtifactId();
+
+		List<MLExample> example_objects = 
+				getExamplesList(hql);
+	    
+	    return example_objects;
+	}
+
+	/**
+	 * Get Artifact-RelatedConcept example. 
+	 * This example is suitable to classify artifacts into unknown set of classes, use linkedConcept to store class
+	 * For example finding whether a sentence is evidence for an specific gene, pas
