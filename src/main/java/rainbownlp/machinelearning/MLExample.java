@@ -608,4 +608,15 @@ public class MLExample  implements Serializable {
 	/**
 	 * Get Artifact-RelatedConcept example. 
 	 * This example is suitable to classify artifacts into unknown set of classes, use linkedConcept to store class
-	 * For example finding whether a sentence is evidence for an specific gene, pas
+	 * For example finding whether a sentence is evidence for an specific gene, pass the sentence artifact and the gene as linkedConcept
+	 * @param artifact
+	 * @param linkedConcept
+	 * @param experimentGroup
+	 * @return
+	 */
+	public static MLExample getInstance(Artifact artifact, String linkedConcept,
+			String experimentGroup) {
+		String hql = "from MLExample where relatedArtifact = "+
+				artifact.getArtifactId() + " and relatedConcept = :relatedConcept " +  
+				" and corpusName = :corpusName";
+		HashMap<String, Objec
