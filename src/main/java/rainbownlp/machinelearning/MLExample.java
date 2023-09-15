@@ -673,4 +673,22 @@ public class MLExample  implements Serializable {
 	}
 
 	public void setExpectedIntegrated(int expectedIntegrated) {
-		this.expectedI
+		this.expectedIntegrated = expectedIntegrated;
+	}
+
+	public int getExpectedIntegrated() {
+		return expectedIntegrated;
+	}
+
+	public String getRelatedConcept() {
+		return relatedConcept;
+	}
+
+	public void setRelatedConcept(String relatedConcept) {
+		this.relatedConcept = relatedConcept;
+	}
+
+	public static void deleteAllExamples(String experimentgroup) {
+		String hql = "delete from MLExample where corpusName = '"+
+				experimentgroup+"'";
+		HibernateUt
