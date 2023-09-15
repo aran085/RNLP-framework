@@ -738,3 +738,10 @@ public class MLExample  implements Serializable {
 	@Transient
 	public Double getNumericExpectedClass() {
 		return Double.parseDouble(expectedClass);
+	}
+
+	@Transient
+	public Double getNumericPredictedClass() {
+		return Double.parseDouble(predictedClass);
+	}
+}
