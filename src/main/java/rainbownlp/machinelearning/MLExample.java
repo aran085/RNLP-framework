@@ -691,4 +691,16 @@ public class MLExample  implements Serializable {
 	public static void deleteAllExamples(String experimentgroup) {
 		String hql = "delete from MLExample where corpusName = '"+
 				experimentgroup+"'";
-		HibernateUt
+		HibernateUtil.executeNonReader(hql, true);
+	}
+
+	public static MLExample findInstance(Artifact artifact, String linkedConcept) {
+		String hql = "from MLExample where relatedArtifact = "+
+				artifact.getArtifactId() + " and relatedConcept = :relatedConcept ";
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("relatedConcept", linkedConcept);
+		
+			List<MLExample> example_objects = 
+					getExamplesList(hql, params);
+		    
+		
