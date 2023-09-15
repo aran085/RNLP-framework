@@ -703,4 +703,22 @@ public class MLExample  implements Serializable {
 			List<MLExample> example_objects = 
 					getExamplesList(hql, params);
 		    
-		
+			MLExample example_obj = null;
+		    if(example_objects.size()!=0)
+		    {
+		    	example_obj = example_objects.get(0);
+		    }
+		    return example_obj;
+	}
+
+	public void setExpectedClassOptionalCategory(
+			String expectedClassOptionalCategory) {
+		this.expectedClassOptionalCategory = expectedClassOptionalCategory;
+	}
+
+	public String getExpectedClassOptionalCategory() {
+		return expectedClassOptionalCategory;
+	}
+
+	public void setPredictedClassOptionalCategory(
+			String predictedClassOptionalCategory) 
