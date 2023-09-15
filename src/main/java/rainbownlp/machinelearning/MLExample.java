@@ -721,4 +721,20 @@ public class MLExample  implements Serializable {
 	}
 
 	public void setPredictedClassOptionalCategory(
-			String predictedClassOptionalCategory) 
+			String predictedClassOptionalCategory) {
+		this.predictedClassOptionalCategory = predictedClassOptionalCategory;
+	}
+
+	public String getPredictedClassOptionalCategory() {
+		return predictedClassOptionalCategory;
+	}
+
+	public static List<MLExample> getAllExamples(String pathLike) {
+		String hql = "from MLExample where associatedFilePath like '%"+
+				pathLike+"%' order by exampleId";
+		return getExamplesList(hql);
+	}
+
+	@Transient
+	public Double getNumericExpectedClass() {
+		return Double.parseDouble(expectedClass);
