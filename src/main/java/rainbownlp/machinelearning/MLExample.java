@@ -651,4 +651,26 @@ public class MLExample  implements Serializable {
 		this.predictionWeight = predictionWeight;
 	}
 
-	public double getPr
+	public double getPredictionWeight() {
+		return predictionWeight;
+	}
+
+
+	public void setExpectedReal(int expectedReal) {
+		this.expectedReal = expectedReal;
+	}
+
+	public int getExpectedReal() {
+		return expectedReal;
+	}
+
+	public void setExpectedClosure(int expectedClosure) {
+		this.expectedClosure = expectedClosure;
+	}
+
+	public int getExpectedClosure() {
+		return expectedClosure;
+	}
+
+	public void setExpectedIntegrated(int expectedIntegrated) {
+		this.expectedI
