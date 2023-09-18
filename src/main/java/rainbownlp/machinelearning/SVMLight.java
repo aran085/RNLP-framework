@@ -39,4 +39,13 @@ public class SVMLight extends SVMLightBasedLearnerEngine {
 	
 		String myShellScript = 
 			ConfigurationUtil.getValue("SVMLightClassifierPath") + " "
-					+ testFi
+					+ testFile + " " + modelFile +
+					" " + resultFile;
+		return myShellScript;
+	}
+	@Override
+	protected boolean isBinaryClassification() {
+		return true;
+	}
+
+}
