@@ -25,4 +25,18 @@ public class SVMLight extends SVMLightBasedLearnerEngine {
 
 	@Override
 	protected String getTrainCommand() {
-		String trainCommand = ConfigurationUtil.getVa
+		String trainCommand = ConfigurationUtil.getValue("SVMLightLearnerPath")
+				+ " -j " +ConfigurationUtil.getValue("SVMCostParameter")
+				+ " -t " +ConfigurationUtil.getValue("SVMKernel")
+				+ " -c " +ConfigurationUtil.getValue("SVMLightC")
+				+" " + trainFile + " " + getModelFilePath();
+		return trainCommand;
+	}
+
+	
+	@Override
+	protected String getTestCommand(String resultFile) {
+	
+		String myShellScript = 
+			ConfigurationUtil.getValue("SVMLightClassifierPath") + " "
+					+ testFi
