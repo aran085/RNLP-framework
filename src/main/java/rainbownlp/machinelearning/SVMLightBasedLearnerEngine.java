@@ -51,4 +51,16 @@ public abstract class SVMLightBasedLearnerEngine extends LearnerEngine {
 		}
 			
 		exampleids = exampleids.replaceFirst(",", "");
-		String reset
+		String resetQuery = "update MLExample set predictedClass = -1 where exampleId in ("+ exampleids +")";
+		HibernateUtil.executeNonReader(resetQuery, true);
+					
+		String resultFile = modelFile+"_result.txt";
+		
+		if(isBinaryClassification())
+			testFile = SVMLightFormatConvertor.writeToFileBinary(test_example_ids, taskName);
+		else 
+			testFile = SVMLightFormatConvertor.writeToFile(test_example_ids, taskName);
+		
+		
+		SystemUtil.runShellCommand(getTestCommand(resultFile));
+		
