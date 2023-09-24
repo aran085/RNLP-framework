@@ -23,4 +23,19 @@ public abstract class SVMLightBasedLearnerEngine extends LearnerEngine {
 		List<Integer> train_example_ids = new ArrayList<Integer>();
 		for(MLExample example : pTrainExamples)
 		{
-			train_example_i
+			train_example_ids.add(example.getExampleId());
+		}
+		if(isBinaryClassification())
+			trainFile = SVMLightFormatConvertor.writeToFileBinary(train_example_ids, taskName);
+		else
+			trainFile = SVMLightFormatConvertor.writeToFile(train_example_ids, taskName);
+
+		String myShellScript = getTrainCommand();
+
+		SystemUtil.runShellCommand(myShellScript);
+	}
+	
+	public void test(List<MLExample> pTestExamples) throws Exception{
+		File model = new File(getModelFilePath());
+		if(!model.exists()) {
+	
