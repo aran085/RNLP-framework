@@ -63,4 +63,19 @@ public abstract class SVMLightBasedLearnerEngine extends LearnerEngine {
 		
 		
 		SystemUtil.runShellCommand(getTestCommand(resultFile));
-		
+				
+		File f=new File(resultFile);
+		if (!f.exists()) {
+			throw(new Exception("SVM result not generated!"));
+		}
+	
+		// 2. read classification output and update database
+		FileReader fileR = new FileReader(resultFile);
+		BufferedReader reader = new BufferedReader(fileR);
+	
+		int counter = 0;
+		while (counter<pTestExamples.size() && reader.ready()) {
+			String line = reader.readLine();
+			Double classNum = -1D;
+			Double weight = 0D;
+			String[] line
