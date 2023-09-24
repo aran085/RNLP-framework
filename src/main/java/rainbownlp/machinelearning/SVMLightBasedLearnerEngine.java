@@ -38,4 +38,17 @@ public abstract class SVMLightBasedLearnerEngine extends LearnerEngine {
 	public void test(List<MLExample> pTestExamples) throws Exception{
 		File model = new File(getModelFilePath());
 		if(!model.exists()) {
-	
+			throw(new Exception("Model file is missing, train before test: "+modelFile));
+		}
+		
+		ConfigurationUtil.TrainingMode = false;
+		List<Integer> test_example_ids = new ArrayList<Integer>();
+		String exampleids = "";
+		for(MLExample example : pTestExamples)
+		{
+			exampleids = exampleids.concat(","+example.getExampleId());
+			test_example_ids.add(example.getExampleId());
+		}
+			
+		exampleids = exampleids.replaceFirst(",", "");
+		String reset
