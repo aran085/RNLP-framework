@@ -91,4 +91,15 @@ public abstract class SVMLightBasedLearnerEngine extends LearnerEngine {
 			}
 			
 			pTestExamples.get(counter).setPredictedClass(classNum.toString());
-			pTestExamples.get(c
+			pTestExamples.get(counter).setPredictionWeight(weight);
+			
+			MLExample test = pTestExamples.get(counter);
+			String savePredictedQuery = "update MLExample set predictedClass ="+test.getPredictedClass()+" , predictionWeight = " +
+					weight+" where exampleId="+test.getExampleId();
+			HibernateUtil.executeNonReader(savePredictedQuery);
+			
+			counter++;
+		}
+
+		assert !reader.ready() : "Something wrong file remained, updated rows:"+counter;
+		assert counter==pTestE
