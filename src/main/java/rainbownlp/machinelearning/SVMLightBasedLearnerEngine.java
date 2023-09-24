@@ -78,4 +78,17 @@ public abstract class SVMLightBasedLearnerEngine extends LearnerEngine {
 			String line = reader.readLine();
 			Double classNum = -1D;
 			Double weight = 0D;
-			String[] line
+			String[] lineParts = line.split(" ");
+			if(isBinaryClassification()){
+				weight = Double.parseDouble(lineParts[0]);
+				classNum = 1D;
+				if(weight>0)
+					classNum=2D;
+			}else{
+				classNum = Double.parseDouble(lineParts[0]) - 1;//convert to index (e.g. 1 -> 0)
+				if(lineParts.length>classNum+1)
+					weight = Double.parseDouble(lineParts[classNum.intValue()]);
+			}
+			
+			pTestExamples.get(counter).setPredictedClass(classNum.toString());
+			pTestExamples.get(c
