@@ -33,4 +33,13 @@ public class WekaFormatConvertor {
 		int counter = 0;
 	    // set attributes
 	    List<FeatureValuePair> fvps = (List<FeatureValuePair>) 
-	    		H
+	    		HibernateUtil.executeReader("from FeatureValuePair where tempFeatureIndex<>"+Integer.MAX_VALUE+
+	    				" group by tempFeatureIndex");
+	    // 1. set up attributes
+	    FastVector atts = new FastVector();
+    	for(int i=0;i<fvps.size();i++){
+    		FeatureValuePair fvp = fvps.get(i);
+	    	if(fvp.getFeatureValueAuxiliary()==null)
+	    		atts.addElement(new Attribute(fvp.getFeatureName()));
+	    	else
+	    		atts.addElement(new A
