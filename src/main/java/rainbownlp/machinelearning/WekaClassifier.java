@@ -123,3 +123,18 @@ public class WekaClassifier extends LearnerEngine {
 				fold+"-" + wekaAlgorithmName+
 				"-test-" + taskName + ".arff");	
 	}
+
+	private void setTestFilePath(String pTestFile) {
+		testFile = pTestFile;
+	}
+
+	private void setTrainFilePath(String pTrainFile) {
+		trainFile = pTrainFile;		
+	}
+
+	private void setModelFilePath(String pModelFile) {
+		modelFile = pModelFile;
+	}
+
+
+}
