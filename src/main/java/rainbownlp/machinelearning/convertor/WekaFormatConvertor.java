@@ -18,4 +18,19 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.SparseInstance;
 import weka.core.converters.ArffSaver;
-import weka.core.conve
+import weka.core.converters.Saver;
+
+public class WekaFormatConvertor {
+	static int numClassRatio = ConfigurationUtil.getValueInteger("numClassesRatio");
+	
+	public static void writeToFile(List<Integer> exampleIdsToWrite, String filePath,String taskName
+			,String[] possibleClasses) 
+		throws Exception
+	{
+		if(new File(filePath).exists()) return;
+		
+		
+		int counter = 0;
+	    // set attributes
+	    List<FeatureValuePair> fvps = (List<FeatureValuePair>) 
+	    		H
