@@ -102,4 +102,13 @@ public abstract class SVMLightBasedLearnerEngine extends LearnerEngine {
 		}
 
 		assert !reader.ready() : "Something wrong file remained, updated rows:"+counter;
-		assert counter==pTestE
+		assert counter==pTestExamples.size() : "Something wrong resultset remained, updated rows:"+counter;
+		
+		reader.close();
+		
+	}
+	protected abstract boolean isBinaryClassification();
+	protected abstract String getTrainCommand();
+
+	protected abstract String getTestCommand(String resultFile);
+}
