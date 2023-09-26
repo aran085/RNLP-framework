@@ -64,4 +64,15 @@ public class WekaFormatConvertor {
 	    		continue;
 	    	}
 	    	Double expectedClass = example.getNumericExpectedClass()+1;
-	    	// create ins
+	    	// create instance
+	    	double[] vals = new double[fvps.size()+1];
+    		List<MLExampleFeature> features = example.getExampleFeatures();
+	    	
+	    	for(int i=0;i<fvps.size();i++){
+	    		FeatureValuePair fvp = fvps.get(i);
+	    		vals[i]=0;
+	    		for(MLExampleFeature feature:features){
+	    			FeatureValuePair featureFVP = feature.getFeatureValuePair();
+	    			if(featureFVP.getTempFeatureIndex() != fvp.getTempFeatureIndex()) continue;
+	    			
+		   
