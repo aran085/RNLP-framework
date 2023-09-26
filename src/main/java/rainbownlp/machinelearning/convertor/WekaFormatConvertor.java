@@ -52,4 +52,16 @@ public class WekaFormatConvertor {
     	
 	    Instances data = new Instances(taskName, atts, 0);
 	    FileOutputStream file_writer = new FileOutputStream(filePath);
-		ArffSaver saver = new ArffSaver
+		ArffSaver saver = new ArffSaver();
+	    saver.setDestination(file_writer);
+	    saver.setRetrieval(Saver.INCREMENTAL);
+	    saver.setStructure(data);
+	    for(Integer example_id : exampleIdsToWrite) {
+	    	counter++;
+	    	MLExample example = MLExample.getExampleById(example_id);
+	    	if(example.getExpectedClass() == null){
+	    		FileUtil.logLine(FileUtil.DEBUG_FILE, "expected class is null!");
+	    		continue;
+	    	}
+	    	Double expectedClass = example.getNumericExpectedClass()+1;
+	    	// create ins
