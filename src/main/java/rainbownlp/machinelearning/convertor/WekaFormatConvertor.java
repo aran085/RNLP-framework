@@ -42,4 +42,14 @@ public class WekaFormatConvertor {
 	    	if(fvp.getFeatureValueAuxiliary()==null)
 	    		atts.addElement(new Attribute(fvp.getFeatureName()));
 	    	else
-	    		atts.addElement(new A
+	    		atts.addElement(new Attribute(fvp.getFeatureName()+fvp.getFeatureValue()));
+	    }
+    	
+    	 FastVector classVals = new FastVector();
+    	 for (int i = 0; i < possibleClasses.length; i++)
+    	      classVals.addElement(possibleClasses[i]);
+    	 atts.addElement(new Attribute("class", classVals));
+    	
+	    Instances data = new Instances(taskName, atts, 0);
+	    FileOutputStream file_writer = new FileOutputStream(filePath);
+		ArffSaver saver = new ArffSaver
