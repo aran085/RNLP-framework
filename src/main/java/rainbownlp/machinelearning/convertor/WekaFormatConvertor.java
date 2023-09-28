@@ -84,4 +84,17 @@ public class WekaFormatConvertor {
 	    	}
 	    	vals[vals.length-1] = classVals.indexOf(String.valueOf(expectedClass.intValue()));
 	    	if(vals[vals.length-1]==-1)
-	    		throw(new Exception("Expected class not found in possible class values: "+expectedClass))
+	    		throw(new Exception("Expected class not found in possible class values: "+expectedClass));
+	    	SparseInstance instance = new SparseInstance(1.0, vals);
+	    	instance.setDataset(data);
+//	    	data.add(instance);
+	    	saver.writeIncremental(instance);
+	    	FileUtil.logLine(null, "example processed: "+counter+"/"+exampleIdsToWrite.size());
+	    	if(counter%100==0)
+	    		file_writer.flush();
+	    }
+		file_writer.flush();
+		file_writer.close();
+	}
+
+}
