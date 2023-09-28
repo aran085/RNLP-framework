@@ -96,3 +96,20 @@ public class InSentenceExampleBuilder {
 		if(phrases.size()<2) return false;
 		
 		return hasLink;
+	}
+
+	/**
+	 * Abstract implementation here, inherit to inject more logics
+	 * @param sentence
+	 * @param phrases
+	 * @return
+	 */
+	protected boolean isValidLink(Phrase phrase1, Phrase phrase2)
+	{
+		boolean hasLink = true;
+		if(phrase1.equals(phrase2)) return false;
+		
+		return hasLink;
+	}
+	
+}
