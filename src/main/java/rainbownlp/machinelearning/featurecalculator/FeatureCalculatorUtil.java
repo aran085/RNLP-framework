@@ -11,4 +11,16 @@ public class FeatureCalculatorUtil {
 		ArrayList<String> ngrams = new ArrayList<String>();
 		int stepRemained = n;
 		Artifact curArtifact = startArtifact.getPreviousArtifact();
-		String curInclusi
+		String curInclusiveString = startArtifact.getContent();
+		while(stepRemained > 0 && curArtifact != null)
+		{
+			String curContent = curArtifact.getContent().trim();
+			if(curContent.equals(""))
+				continue;
+			
+			curInclusiveString = curContent + "_" + curInclusiveString;
+			String jumpString = curContent+"_"+startArtifact.getContent();
+			curArtifact = curArtifact.getPreviousArtifact();
+			stepRemained--;
+			
+			ngrams.ad
