@@ -75,4 +75,13 @@ public class WekaFormatConvertor {
 	    			FeatureValuePair featureFVP = feature.getFeatureValuePair();
 	    			if(featureFVP.getTempFeatureIndex() != fvp.getTempFeatureIndex()) continue;
 	    			
-		   
+		        	if(fvp.getFeatureValueAuxiliary()==null){//single value
+		        		vals[i] = Double.parseDouble(featureFVP.getFeatureValue());
+		        	}else
+		        		vals[i] = Double.parseDouble(featureFVP.getFeatureValueAuxiliary());
+		        	break;
+	    		}
+	    	}
+	    	vals[vals.length-1] = classVals.indexOf(String.valueOf(expectedClass.intValue()));
+	    	if(vals[vals.length-1]==-1)
+	    		throw(new Exception("Expected class not found in possible class values: "+expectedClass))
