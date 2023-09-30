@@ -23,4 +23,19 @@ public class FeatureCalculatorUtil {
 			curArtifact = curArtifact.getPreviousArtifact();
 			stepRemained--;
 			
-			ngrams.ad
+			ngrams.add(curInclusiveString);
+			ngrams.add(jumpString);
+		}
+		
+		return ngrams;
+	}
+
+	public static List<String> getNGramAfter(Artifact endArtifact, int n) {
+		ArrayList<String> ngrams = new ArrayList<String>();
+		int stepRemained = n;
+		Artifact curArtifact = endArtifact.getNextArtifact();
+		String curInclusiveString = endArtifact.getContent();
+		while(stepRemained > 0 && curArtifact != null)
+		{
+			String curContent = curArtifact.getContent().trim();
+			if(curContent.equals(""))
