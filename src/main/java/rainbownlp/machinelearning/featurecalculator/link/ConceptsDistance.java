@@ -17,4 +17,21 @@ public class ConceptsDistance implements IFeatureCalculator {
 	{
 		String experimentgroup = "LinkClassificationEventEvent";
 		List<MLExample> trainExamples = 
-			MLExample
+			MLExample.getAllExamples(experimentgroup, true);
+		int counter = 0;
+		for (MLExample example:trainExamples)
+		{
+			ConceptsDistance lbf = new ConceptsDistance();
+			lbf.calculateFeatures(example);
+			counter++;
+			FileUtil.logLine(null, "Processed : "+counter +"/"+trainExamples.size());
+		}
+		
+	}
+	@Override
+	public void calculateFeatures(MLExample exampleToProcess) {
+		
+	
+	}
+	
+}
