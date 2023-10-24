@@ -28,4 +28,16 @@ public class LinkGeneralFeatures implements IFeatureCalculator {
 		int counter = 0;
 		for (MLExample example:trainExamples)
 		{
-			Li
+			LinkGeneralFeatures lbf = new LinkGeneralFeatures();
+			lbf.calculateFeatures(example);
+			counter++;
+			FileUtil.logLine(null, "Processed : "+counter +"/"+trainExamples.size());
+		}
+		
+	}
+	@Override
+	public void calculateFeatures(MLExample exampleToProcess) {
+			
+			PhraseLink phraseLink = exampleToProcess.getRelatedPhraseLink();
+			Phrase phrase1 = phraseLink.getFromPhrase();
+			Phrase phrase2 = phraseLink.ge
