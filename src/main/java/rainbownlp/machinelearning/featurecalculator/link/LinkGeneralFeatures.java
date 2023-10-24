@@ -40,4 +40,16 @@ public class LinkGeneralFeatures implements IFeatureCalculator {
 			
 			PhraseLink phraseLink = exampleToProcess.getRelatedPhraseLink();
 			Phrase phrase1 = phraseLink.getFromPhrase();
-			Phrase phrase2 = phraseLink.ge
+			Phrase phrase2 = phraseLink.getToPhrase();
+			
+			String relation_location_type = getInterMentionLocationType(phrase1,phrase2);
+			
+			
+			FeatureValuePair argumentTypeFeature = FeatureValuePair.getInstance(
+						FeatureName.InterMentionLocationType, 
+						relation_location_type,"1");
+				
+			MLExampleFeature.setFeatureExample(exampleToProcess, argumentTypeFeature);
+			
+			// The content of the args
+			FeatureValuePair fromPhraseContentFeature = FeatureValuePai
