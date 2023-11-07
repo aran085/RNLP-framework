@@ -20,4 +20,15 @@ import rainbownlp.parser.DependenciesTreeUtil;
  * @author ehsan
  * 
  */
-public class ParseTreeFeatu
+public class ParseTreeFeatures implements IFeatureCalculator {
+	public static void main(String[] args) throws Exception
+	{
+//		List<MLExample> trainExamples = 
+//			MLExample.getAllExamples(LinkExampleBuilder.ExperimentGroupEventEvent, true);
+//		trainExamples.addAll(
+//				MLExample.getAllExamples(LinkExampleBuilder.ExperimentGroupTimexEvent, true));
+//		for ( MLExample example_to_process: trainExamples )
+//		{
+//			ParseTreeFeatures pt =  new ParseTreeFeatures();
+//			
+//			pt.calc
