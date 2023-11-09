@@ -31,4 +31,19 @@ public class ParseTreeFeatures implements IFeatureCalculator {
 //		{
 //			ParseTreeFeatures pt =  new ParseTreeFeatures();
 //			
-//			pt.calc
+//			pt.calculateFeatures(example_to_process);
+//		}
+	}
+	
+		@Override
+	public void calculateFeatures(MLExample exampleToProcess) {
+			try {
+				PhraseLink phraseLink = exampleToProcess.getRelatedPhraseLink();
+				Phrase phrase1 = phraseLink.getFromPhrase();
+				Phrase phrase2 = phraseLink.getToPhrase();
+				
+				Artifact fromArtifact = phrase1.getStartArtifact();
+				
+				Artifact toArtifact = phrase2.getStartArtifact();
+				DependenciesTreeUtil depUtil =
+						new DependenciesT
