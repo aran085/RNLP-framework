@@ -46,4 +46,18 @@ public class ParseTreeFeatures implements IFeatureCalculator {
 				
 				Artifact toArtifact = phrase2.getStartArtifact();
 				DependenciesTreeUtil depUtil =
-						new DependenciesT
+						new DependenciesTreeUtil(fromArtifact.getParentArtifact());
+				
+				
+				List<GraphEdge> path =
+						depUtil.getParseTreePath(fromArtifact, toArtifact);
+				if(path!=null)
+				{
+					FeatureValuePair parseTreePathSize = FeatureValuePair.getInstance(
+							FeatureName.ParseTreePathSize, 
+							String.valueOf(path.size()));
+					
+					MLExampleFeature.setFeatureExample(exampleToProcess, parseTreePathSize);
+					for(int i=0;i<path.size();i++)
+					{
+						GraphEdge edge = path.get(i);
