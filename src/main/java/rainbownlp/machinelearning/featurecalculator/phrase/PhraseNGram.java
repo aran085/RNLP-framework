@@ -10,4 +10,20 @@ import rainbownlp.core.PhraseLink;
 import rainbownlp.machinelearning.IFeatureCalculator;
 import rainbownlp.machinelearning.MLExample;
 import rainbownlp.machinelearning.MLExampleFeature;
-import rainbownlp.machinelearning.featurecalcu
+import rainbownlp.machinelearning.featurecalculator.FeatureCalculatorUtil;
+import rainbownlp.util.StringUtil;
+
+public class PhraseNGram implements IFeatureCalculator {
+
+	@Override
+	public void calculateFeatures(MLExample exampleToProcess) {
+		Phrase p = exampleToProcess.getRelatedPhrase();
+		if(p == null) {
+			return;
+		}
+		
+		
+		calculateInPhraseNGram(1, p, exampleToProcess, "InPhrase1Gram");
+		calculateInPhraseNGram(2, p, exampleToProcess, "InPhrase2Gram");
+		
+		List<String> beforePhraseN
