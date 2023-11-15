@@ -26,4 +26,13 @@ public class PhraseNGram implements IFeatureCalculator {
 		calculateInPhraseNGram(1, p, exampleToProcess, "InPhrase1Gram");
 		calculateInPhraseNGram(2, p, exampleToProcess, "InPhrase2Gram");
 		
-		List<String> beforePhraseN
+		List<String> beforePhraseNGrams = FeatureCalculatorUtil.getNGramBefore(p.getStartArtifact(), 3);
+		List<String> afterPhraseNGrams = FeatureCalculatorUtil.getNGramAfter(p.getEndArtifact(), 3);
+		
+		for(String beforeNGram : beforePhraseNGrams)
+		{
+			FeatureValuePair value_pair = FeatureValuePair.getInstance(
+					"BeforePhraseNGram", beforeNGram, "1");
+			MLExampleFeature.setFeatureExample(exampleToProcess,value_pair);
+		}
+		for(String afterNGram : 
