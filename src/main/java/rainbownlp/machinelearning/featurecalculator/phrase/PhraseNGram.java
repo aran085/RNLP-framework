@@ -48,4 +48,19 @@ public class PhraseNGram implements IFeatureCalculator {
 		String[] word_text = 
 				StringUtil.getTermByTermWordnet(phrase.getPhraseContent().toLowerCase()).split(" ");
 			
-		for(int i=0;i<word_text.len
+		for(int i=0;i<word_text.length-n;i++)
+		{
+			String cur_content = "";
+			for(int j=0;j<n;j++)
+			{
+				int new_part_index = i+j;
+				if(!word_text[new_part_index].trim().equals(""))
+				{
+					cur_content = 
+						cur_content.concat("_"+word_text[new_part_index].trim());
+				}
+			}
+			cur_content = cur_content.replaceAll("^_", "");
+			FeatureValuePair value_pair = FeatureValuePair.getInstance(
+					featureName, cur_content, "1");
+			MLExampleFeature.setFeatu
