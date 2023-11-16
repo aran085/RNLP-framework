@@ -35,4 +35,17 @@ public class PhraseNGram implements IFeatureCalculator {
 					"BeforePhraseNGram", beforeNGram, "1");
 			MLExampleFeature.setFeatureExample(exampleToProcess,value_pair);
 		}
-		for(String afterNGram : 
+		for(String afterNGram : afterPhraseNGrams)
+		{
+			FeatureValuePair value_pair = FeatureValuePair.getInstance(
+					"AfterPhraseNGram", afterNGram, "1");
+			MLExampleFeature.setFeatureExample(exampleToProcess,value_pair);
+		}
+	}
+	
+	void calculateInPhraseNGram(int n, Phrase phrase, MLExample example, String featureName)
+	{
+		String[] word_text = 
+				StringUtil.getTermByTermWordnet(phrase.getPhraseContent().toLowerCase()).split(" ");
+			
+		for(int i=0;i<word_text.len
