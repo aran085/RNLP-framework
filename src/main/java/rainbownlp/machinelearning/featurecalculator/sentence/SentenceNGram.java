@@ -18,4 +18,13 @@ public class SentenceNGram implements IFeatureCalculator {
 			PhraseLink sentencesLink = exampleToProcess.getRelatedPhraseLink();
 			Artifact firstSentence = sentencesLink.getFirstPhrase().getStartArtifact();
 			Artifact secondSentence = sentencesLink.getSecondPhrase().getStartArtifact();
-			calculateSentenceNGram(1, firstSentence, exampleToProcess, "FirstSe
+			calculateSentenceNGram(1, firstSentence, exampleToProcess, "FirstSentence1Gram");
+			calculateSentenceNGram(1, secondSentence, exampleToProcess, "SecondSentence1Gram");
+			calculateSentenceNGram(2, firstSentence, exampleToProcess, "FirstSentence2Gram");
+			calculateSentenceNGram(2, secondSentence, exampleToProcess, "SecondSentence2Gram");
+		}else
+		{
+			Artifact sentence = exampleToProcess.getRelatedPhrase().getStartArtifact();
+			if(sentence.getArtifactType() ==  Type.Sentence)
+			{
+				calculateSentenceNGram(1, 
