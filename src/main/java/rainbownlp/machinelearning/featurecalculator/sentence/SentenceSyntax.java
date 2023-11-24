@@ -11,4 +11,16 @@ public class SentenceSyntax implements IFeatureCalculator {
 
 	@Override
 	public void calculateFeatures(MLExample exampleToProcess) {
-		Artifact sentence = exampleToProce
+		Artifact sentence = exampleToProcess.getRelatedPhrase().getStartArtifact();
+		if(sentence.getArtifactType() !=  Type.Sentence)
+			return;
+		FeatureValuePair wordCountFeature = FeatureValuePair.getInstance("WordCount", 
+				((Integer)sentence.getContent().split(" ").length).toString());
+		
+		MLExampleFeature.setFeatureExample(exampleToProcess, wordCountFeature);
+		
+		
+		FeatureValuePair lineIndexFeature = FeatureValuePair.getInstance("LineIndex", 
+				(sentence.getLineIndex()).toString());
+		
+		MLE
