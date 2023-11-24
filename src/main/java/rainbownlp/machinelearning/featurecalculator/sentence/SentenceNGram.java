@@ -43,4 +43,19 @@ public class SentenceNGram implements IFeatureCalculator {
 			String cur_content = "";
 			for(int j=0;j<n;j++)
 			{
-				int new_part
+				int new_part_index = i+j;
+				if(!word_text[new_part_index].trim().equals(""))
+				{
+					cur_content = 
+						cur_content.concat("_"+word_text[new_part_index].trim());
+				}
+			}
+			cur_content = cur_content.replaceAll("^_", "");
+			FeatureValuePair value_pair = FeatureValuePair.getInstance(
+					featureName, cur_content, "1");
+			MLExampleFeature.setFeatureExample(example,value_pair);
+
+		}
+	}
+
+}
