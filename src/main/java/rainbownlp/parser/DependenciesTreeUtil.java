@@ -13,4 +13,23 @@ import rainbownlp.core.graph.GraphEdge;
 // This uses  Stanford Dependencies (SD)  file
 public class DependenciesTreeUtil {
 	
-	public 
+	public Artifact sentenceArtifact;
+	
+	UndirectedGraph<String, GraphEdge> sentenceTree =
+            new SimpleGraph<String, GraphEdge>(GraphEdge.class);
+	
+	List<DependencyLine> dependencies;
+	SentenceClauseManager clauseManager;
+	public DependenciesTreeUtil(Artifact pSentence) throws Exception
+	{
+		sentenceArtifact = pSentence;
+		clauseManager =
+				new SentenceClauseManager(sentenceArtifact);
+		dependencies = clauseManager.sentDepLines;
+		makeTrees();
+	}
+	
+
+
+
+	private void makeTre
