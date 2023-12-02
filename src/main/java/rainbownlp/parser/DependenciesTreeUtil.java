@@ -32,4 +32,14 @@ public class DependenciesTreeUtil {
 
 
 
-	private void makeTre
+	private void makeTrees() {
+			
+			for(DependencyLine depLine:dependencies)
+			{
+				if(!sentenceTree.containsVertex(depLine.firstPart+depLine.firstOffset))
+					sentenceTree.addVertex(depLine.firstPart+depLine.firstOffset);
+				if(!sentenceTree.containsVertex(depLine.secondPart+depLine.secondOffset))
+					sentenceTree.addVertex(depLine.secondPart+depLine.secondOffset);
+				
+				//make link v1 & v2
+				sentenceTree.addEdge(depLine.firstPart+depLine.firstOffse
