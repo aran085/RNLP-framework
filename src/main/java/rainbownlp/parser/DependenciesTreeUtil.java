@@ -65,4 +65,19 @@ public class DependenciesTreeUtil {
 				DijkstraShortestPath.findPathBetween(sentenceTree, 
 						headWord1.getContent()+word1Offset, 
 						headWord2.getContent()+word2Offset);
-		} catch (E
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("error in getParseTreeDistance:"+headWord1+headWord2);
+		}
+		
+		return path;
+	}
+	
+	// find the dependencies of a word within a sentence
+	public List<String> getDependencyLinkedWords(String word, int word_index, int sentence_id) throws Exception{
+		
+		List<String> dependencyType=new ArrayList<String>();
+		
+		for(DependencyLine dependency : dependencies)
+		{
+			if(dependency.firstO
