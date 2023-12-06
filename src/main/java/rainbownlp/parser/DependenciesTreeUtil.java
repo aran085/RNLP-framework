@@ -42,4 +42,27 @@ public class DependenciesTreeUtil {
 					sentenceTree.addVertex(depLine.secondPart+depLine.secondOffset);
 				
 				//make link v1 & v2
-				sentenceTree.addEdge(depLine.firstPart+depLine.firstOffse
+				sentenceTree.addEdge(depLine.firstPart+depLine.firstOffset, 
+						depLine.secondPart+depLine.secondOffset);
+			}
+	}
+	
+	
+	
+	
+	
+
+	public List<GraphEdge> getParseTreePath(Artifact headWord1, Artifact headWord2) {
+		
+		List<GraphEdge> path = null;
+		
+		//link tokens
+		 try {
+			int word1Offset = headWord1.getWordIndex()+1;
+			int word2Offset = headWord2.getWordIndex()+1;
+			
+			path = 
+				DijkstraShortestPath.findPathBetween(sentenceTree, 
+						headWord1.getContent()+word1Offset, 
+						headWord2.getContent()+word2Offset);
+		} catch (E
