@@ -80,4 +80,19 @@ public class DependenciesTreeUtil {
 		
 		for(DependencyLine dependency : dependencies)
 		{
-			if(dependency.firstO
+			if(dependency.firstOffset == word_index)
+				dependencyType.add(dependency.secondPart);
+			if(dependency.secondOffset == word_index)
+				dependencyType.add(dependency.firstPart);
+		}
+				
+		return dependencyType;
+	}	
+	// find the dependencies of a word within a sentence
+		public List<String> getDependencyTypes(String word, int sentence_id) throws Exception{
+			
+			List<String> dependencyType=new ArrayList<String>();
+			
+			for(DependencyLine dependency : dependencies)
+			{
+				if(d
