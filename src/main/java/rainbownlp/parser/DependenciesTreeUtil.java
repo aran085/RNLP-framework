@@ -95,4 +95,10 @@ public class DependenciesTreeUtil {
 			
 			for(DependencyLine dependency : dependencies)
 			{
-				if(d
+				if(dependency.hasWord(word))
+					dependencyType.add(dependency.relationName);
+			}
+				
+			return dependencyType;
+		}
+}
