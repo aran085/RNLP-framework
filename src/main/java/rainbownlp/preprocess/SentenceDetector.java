@@ -20,4 +20,26 @@ public class SentenceDetector {
 		  SentenceModel model = new SentenceModel(modelIn);
 		  sentenceDetector = new SentenceDetectorME(model);
 		}
-		cat
+		catch (IOException e) {
+		  e.printStackTrace();
+		}
+		finally {
+		  if (modelIn != null) {
+		    try {
+		      modelIn.close();
+		    }
+		    catch (IOException e) {
+		    }
+		  }
+		}
+	}
+	
+	public String[] getSentence(String text){
+		String sentences[] = sentenceDetector.sentDetect(text);
+		
+		return sentences;
+	}
+	public Integer[] getSentencePos(String text){
+		
+		Span[] spans= sentenceDetector.sentPosDetect(text);
+		Integer[] positions = new I
