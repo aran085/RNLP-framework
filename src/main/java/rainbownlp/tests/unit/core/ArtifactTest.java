@@ -32,3 +32,21 @@ public class ArtifactTest   {
 		
 		assertEquals(sentence_artifact.getContent(), "this is test.");
 		assertEquals(sentence_artifact.getArtifactType(), Type.Sentence);
+		assertEquals(sentence_artifact.getParentArtifact().getArtifactId(), doc_artifact.getArtifactId());
+		
+		
+		Artifact sentence_artifact2 = Artifact.getInstance(Type.Sentence);
+		sentence_artifact2.setContent("hello test.");
+		sentence_artifact2.setParentArtifact(doc_artifact);
+		sentence_artifact2.setPreviousArtifact(sentence_artifact);
+		
+		HibernateUtil.save(sentence_artifact2);
+			
+		assertEquals(sentence_artifact.getNextArtifact().getArtifactId(),
+				sentence_artifact2.getArtifactId());
+		assertEquals(sentence_artifact2.getPreviousArtifact().getArtifactId(), 
+				sentence_artifact.getArtifactId());
+		
+	}
+
+}
