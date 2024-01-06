@@ -25,4 +25,16 @@ public class MLExampleFeatureTest   {
 		
 		assertNotNull(feature1);
 		assertTrue(feature1.getFeatureValuePairId()!=-1);
-		assertTrue(feature1.getFeatureValue().
+		assertTrue(feature1.getFeatureValue().equals("test_test"));
+		assertTrue(feature1.getFeatureName().equals(FeatureName.TWOGram));
+		
+		MLExample artifact_example = new MLExample();
+		artifact_example.setCorpusName("test");
+//		artifact_example.setRelatedArtifact(doc_artifact);
+//		
+//		assertTrue(artifact_example.getRelatedArtifact().equals(doc_artifact));
+		
+		MLExampleFeature artifact_feature = 
+			MLExampleFeature.setFeatureExample(artifact_example, feature1);
+		
+		assertTrue(arti
