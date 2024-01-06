@@ -37,4 +37,9 @@ public class MLExampleFeatureTest   {
 		MLExampleFeature artifact_feature = 
 			MLExampleFeature.setFeatureExample(artifact_example, feature1);
 		
-		assertTrue(arti
+		assertTrue(artifact_feature.getFeatureValuePair().equals(feature1));
+		
+		
+	}
+
+}
