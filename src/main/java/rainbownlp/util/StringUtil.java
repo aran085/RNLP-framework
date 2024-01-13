@@ -11,4 +11,21 @@ import weka.core.Stopwords;
 import edu.stanford.nlp.ling.CoreAnnotations.LemmaAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.TextAnnotation;
-import edu.stanford.nlp.ling.CoreAnnotations.TokensAnnota
+import edu.stanford.nlp.ling.CoreAnnotations.TokensAnnotation;
+import edu.stanford.nlp.ling.CoreLabel;
+import edu.stanford.nlp.pipeline.Annotation;
+import edu.stanford.nlp.pipeline.StanfordCoreNLP;
+import edu.stanford.nlp.util.CoreMap;
+
+public class StringUtil {
+
+	static Properties props = new Properties();
+	static StanfordCoreNLP pipeline = null;
+	static{
+	  props.put("annotators", "lemma"); 
+	  pipeline = new StanfordCoreNLP(props, false);
+	}
+	/**
+	 * 
+	 * @param inputString
+	 * @return MD5 hash o
