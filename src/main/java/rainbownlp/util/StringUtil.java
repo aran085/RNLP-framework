@@ -67,4 +67,17 @@ public class StringUtil {
 	public static String getWordPorterStem(String word)
 	{
 		PorterStemmer stemmer = new PorterStemmer();
-		String stemm
+		String stemmed_word = stemmer.stem(word).toLowerCase();
+		return stemmed_word;
+	}
+	public static String prepareSQLString(String sqlString) {
+		sqlString = sqlString.replace("\\", "\\\\").
+			replace("'", "''").
+			replace("%", "\\%").
+			replace("_", "\\_");
+		return sqlString;
+	}
+
+public static String castForRegex(String textContent) {
+		
+		return textContent.replace("\\","\\\\").replace("/","\\/").replace("*", "\\*").replace("+", "\\+").replace(".", "\\."
