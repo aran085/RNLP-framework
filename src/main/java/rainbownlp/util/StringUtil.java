@@ -41,4 +41,30 @@ public class StringUtil {
 	}
 
 	/**
-	 * Customized definition of stop words for wo
+	 * Customized definition of stop words for word
+	 * @param word
+	 * @return
+	 */
+	public static boolean isStopWord(String word){
+		boolean isStopWord = false;
+		
+		if(word.length() < 2
+				||	Stopwords.isStopword(word)
+				|| word.matches("\\W+")
+				)
+			isStopWord = true;
+		
+		return isStopWord;
+	}
+	
+
+	
+	/**
+	 * Porter stem
+	 * @param word
+	 * @return stemmed word
+	 */
+	public static String getWordPorterStem(String word)
+	{
+		PorterStemmer stemmer = new PorterStemmer();
+		String stemm
