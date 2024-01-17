@@ -28,4 +28,17 @@ public class StringUtil {
 	/**
 	 * 
 	 * @param inputString
-	 * @return MD5 hash o
+	 * @return MD5 hash of given string
+	 * @throws UnsupportedEncodingException
+	 * @throws NoSuchAlgorithmException
+	 */
+	public static String getStringDigest(String inputString)
+			throws UnsupportedEncodingException, NoSuchAlgorithmException {
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		md.update(inputString.getBytes(), 0, inputString.length());
+
+		return new BigInteger(1, md.digest()).toString(16);
+	}
+
+	/**
+	 * Customized definition of stop words for wo
