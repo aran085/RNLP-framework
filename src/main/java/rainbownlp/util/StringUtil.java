@@ -105,4 +105,18 @@ public static String decastRegex(String textContent) {
 	public static String compress(String text) {
 		return text.replace(" ", "").replace(" ", "");
 	}
-	static HashMap<String, String> lemmaCache = ne
+	static HashMap<String, String> lemmaCache = new HashMap<String, String>();
+
+	public static String getTermByTermWordnet(String phrase)
+	{
+//		if(lemmatiser ==null)
+//			lemmatiser = new EngLemmatiser("/home/ehsan/rnlp/nlpdata/lemmatiser",
+//					true, false);
+//		String[] words = phrase.split(" ");
+//		String rootString = "";
+//		for(int i=0;i<words.length;i++)
+//		{
+//			String lemma = lemmaCache.get(words[i]);
+//			if(lemma == null)
+//			{
+//				lemma = lemmatiser.stem(words[i
