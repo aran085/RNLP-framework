@@ -130,4 +130,21 @@ public static String decastRegex(String textContent) {
 		  for(CoreMap sentence: document.get(SentencesAnnotation.class)) {    
 		    for(CoreLabel token: sentence.get(TokensAnnotation.class)) {       
 		    String word = token.get(TextAnnotation.class);      
-		    String lemma = tok
+		    String lemma = token.get(LemmaAnnotation.class); 
+		    System.out.println(word+" --> lemmatized version :" + lemma);
+		    rootStr.append(lemma+" ");
+		    } }
+
+		return rootStr.toString().trim();
+	}
+	public static String getWordLemma(String word)
+	{
+//		if(lemmatiser ==null)
+//			lemmatiser = new EngLemmatiser("/home/ehsan/rnlp/nlpdata/lemmatiser",
+//					true, false);
+		String word_lemma= "";
+//
+//		word_lemma= lemmatiser.stem(word);
+//		return word_lemma;
+		
+		 Ann
