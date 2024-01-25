@@ -119,4 +119,15 @@ public static String decastRegex(String textContent) {
 //			String lemma = lemmaCache.get(words[i]);
 //			if(lemma == null)
 //			{
-//				lemma = lemmatiser.stem(words[i
+//				lemma = lemmatiser.stem(words[i]);
+//				lemmaCache.put(words[i], lemma);
+//			}
+//			rootString = rootString.concat(lemma+" ");
+//		}
+		StringBuilder rootStr = new StringBuilder();
+		  
+		  Annotation document = pipeline.process(phrase);  
+		  for(CoreMap sentence: document.get(SentencesAnnotation.class)) {    
+		    for(CoreLabel token: sentence.get(TokensAnnotation.class)) {       
+		    String word = token.get(TextAnnotation.class);      
+		    String lemma = tok
