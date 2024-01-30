@@ -147,4 +147,14 @@ public static String decastRegex(String textContent) {
 //		word_lemma= lemmatiser.stem(word);
 //		return word_lemma;
 		
-		 Ann
+		 Annotation document = pipeline.process(word);  
+		  for(CoreMap sentence: document.get(SentencesAnnotation.class)) {    
+		    for(CoreLabel token: sentence.get(TokensAnnotation.class)) {       
+		    String lemma = token.get(LemmaAnnotation.class); 
+		    System.out.println(word+" --> lemmatized version :" + lemma);
+		    word_lemma += lemma+" ";
+		    } }
+		  return word_lemma;
+	}
+
+	public static boolean isDate(Stri
