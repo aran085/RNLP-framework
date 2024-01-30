@@ -172,4 +172,8 @@ public static String decastRegex(String textContent) {
 	public static String concatArray(String string, String[] words) {
 		StringBuilder concat = new StringBuilder();
 		for(int i=0;i<words.length;i++){
-		
+			concat.append(words[i]+" "); 
+		}
+		return concat.toString().trim();
+	}
+}
