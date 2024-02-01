@@ -69,3 +69,8 @@ public class CacheEntry {
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put("key", pKey);
 	    
+		CacheEntry entry=(CacheEntry)HibernateUtil.executeGetOneValue(hql,params);;
+
+		return entry;
+	}
+}
