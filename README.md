@@ -16,4 +16,18 @@ The system requires the text document and entities annotations for relationship 
 
 1. Utilize 'SimpleDocumentLoader' or create a new document loader by implementing 'IDocumentAnalyzer' interface to load test/train documents into the framework.
 
-2. Instantiate 'Phrase' and 'PhraseLink' to load annotations, and persist them with Hi
+2. Instantiate 'Phrase' and 'PhraseLink' to load annotations, and persist them with HibernateUtil.
+
+3. Create machine learning examples by creating Phrase/PhraseLink and MLExample objects.
+
+4. Determine features for every machine learning example (MLExample objects).
+
+5. Train a machine learning model with train examples.
+
+6. Test and evaluate the model using test examples.
+
+This is an example of temporal relationship extraction implementation: https://github.com/aran085/temporal-relation.git
+
+How to cite in your publication?
+==========
+Please cite the follow
