@@ -30,4 +30,10 @@ This is an example of temporal relationship extraction implementation: https://g
 
 How to cite in your publication?
 ==========
-Please cite the follow
+Please cite the following publication if RNLP Framework is used in your projects: 
+
+Emadzadeh, E.; Jonnalagadda, S.; Gonzalez, G., 'Evaluating Distributional Semantic and Feature Selection for Extracting Relationships from Biological Text,' Machine Learning and Applications and Workshops (ICMLA), 2011 10th International Conference on, vol.2, no., pp.66,71, 18-21 Dec. 2011
+
+Questions/Comments
+==========
+Do not hesitate to contact us with your questions and comments.
